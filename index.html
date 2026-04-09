@@ -989,10 +989,10 @@ function buildMQ(){
 /* ═══════════════════════════════════════════════════════════
    SCROLL REVEAL
    ═══════════════════════════════════════════════════════ */
-document.querySelectorAll('.rv').forEach(el=>{
+document.querySelectorAll('.rv,.rv-left,.rv-right,.rv-scale').forEach(el=>{
   new IntersectionObserver(([e])=>{
-    if(e.isIntersecting) e.target.classList.add('ok');
-  },{threshold:.1}).observe(el);
+    if(e.isIntersecting){ e.target.classList.add('ok'); }
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'}).observe(el);
 });
 
 /* ═══════════════════════════════════════════════════════════
