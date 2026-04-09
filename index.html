@@ -146,7 +146,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 @keyframes fadU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 /* rv reveals — only applied via JS observer */
-.rv:not(.ok){opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.rv:not(.ok){opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .rv.ok{opacity:1;transform:none}
 
 /* ── PROCESS CARDS (marble bg) ─────────────────────── */
@@ -417,10 +417,19 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .flinks a:hover{color:var(--gold-l)}
 .fbottom{border-top:1px solid rgba(201,168,76,.08);padding-top:18px;font-size:12px;color:rgba(255,255,255,.22)}
 
-/* REVEALS */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+/* REVEALS — enhanced progressive */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.ok{opacity:1;transform:none}
-.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}.rv-d4{transition-delay:.48s}.rv-d5{transition-delay:.6s}
+/* Slide-from-left variant */
+.rv-left:not(.ok){opacity:0;transform:translateX(-30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-left.ok{opacity:1;transform:none}
+/* Slide-from-right variant */
+.rv-right:not(.ok){opacity:0;transform:translateX(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-right.ok{opacity:1;transform:none}
+/* Scale-up variant */
+.rv-scale:not(.ok){opacity:0;transform:scale(.92);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-scale.ok{opacity:1;transform:none}
 /* Force visibility on home page sections that get stuck */
 .bridge .rv,.bridge-line,#categories .rv,#categories .ccard,.split-entry .rv,.split-btn,#process-section .rv,.proc-step,.cta-ecrin .rv,.cta-ecrin h2,.cta-ecrin p,.cta-ecrin a{opacity:1!important;transform:none!important}
 
