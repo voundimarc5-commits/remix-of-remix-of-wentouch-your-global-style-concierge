@@ -1012,12 +1012,20 @@ function goBack(){
 
 /* ═══════ INTEGRATED HERO ANIMATION ═══════ */
 (function(){
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-
   var img = document.querySelector('.hero-img');
-  var ov = document.querySelector('.hero-ov');
   var heroC = document.querySelector('.hero-c');
   var hint = document.querySelector('.scroll-hint');
+
+  // Skip animation if already seen this session or reduced motion
+  if(sessionStorage.getItem('wt-anim') || window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    if(img) img.style.cssText='opacity:1;transform:none';
+    if(heroC){heroC.style.cssText='opacity:1;transform:none';}
+    if(hint) hint.style.cssText='opacity:1;transform:translateX(-50%)';
+    var la=document.getElementById('hero-logo-anim');if(la)la.style.display='none';
+    return;
+  }
+
+  var ov = document.querySelector('.hero-ov');
   var nav = document.getElementById('main-nav');
   var logoAnim = document.getElementById('hero-logo-anim');
   var wEl = document.querySelector('.logo-w');
@@ -1084,6 +1092,7 @@ function goBack(){
   setTimeout(function(){
     if(hint) hint.classList.add('revealed');
     if(logoAnim) logoAnim.style.display = 'none';
+    sessionStorage.setItem('wt-anim','1');
   }, 4200);
 })();
 
