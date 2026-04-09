@@ -1179,10 +1179,10 @@ buildMQ();
 })();
 
 /* ENHANCED SCROLL REVEALS — re-observe new elements */
-document.querySelectorAll('.rv:not(.ok)').forEach(el=>{
+document.querySelectorAll('.rv:not(.ok),.rv-left:not(.ok),.rv-right:not(.ok),.rv-scale:not(.ok)').forEach(el=>{
   new IntersectionObserver(([e])=>{
     if(e.isIntersecting) e.target.classList.add('ok');
-  },{threshold:.1}).observe(el);
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'}).observe(el);
 });
 
 /* HOME STICKY BAR — show after scrolling past hero */
