@@ -1022,6 +1022,43 @@ function goBack(){
   },80);
 }
 
+/* CATEGORY HERO PARALLAX — subtle image movement on scroll in category pages */
+(function(){
+  const cheroImg = document.getElementById('chero-img');
+  const cheroBg = document.getElementById('chero-bg');
+  const chero = document.querySelector('.chero');
+  const cheroCnt = document.querySelector('.chero-cnt');
+  if(!chero) return;
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches) return;
+  /* reveal content on category open */
+  const origGocat = window.gocat;
+  if(origGocat){
+    window.gocat = function(key){
+      origGocat(key);
+      setTimeout(()=>{if(cheroCnt) cheroCnt.classList.add('visible');},50);
+    };
+  }
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const cp = document.getElementById('cp');
+        if(!cp || !cp.classList.contains('active')){ticking=false;return;}
+        const y = window.scrollY;
+        const h = chero.offsetHeight;
+        if(y < h * 1.5){
+          const parallax = y * 0.2;
+          const target = cheroImg.style.display !== 'none' ? cheroImg : cheroBg;
+          target.style.transform = 'translateY('+parallax+'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+})();
+
 
 /* ═══════ INTEGRATED HERO ANIMATION ═══════ */
 (function(){
