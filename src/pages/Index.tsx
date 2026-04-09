@@ -1,13 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BrandMarquee from "@/components/BrandMarquee";
-import SocialProof from "@/components/SocialProof";
+import CategorySection from "@/components/CategorySection";
 import HowItWorks from "@/components/HowItWorks";
+import PaymentMethods from "@/components/PaymentMethods";
 import TrustSection from "@/components/TrustSection";
-import LifestyleSection from "@/components/LifestyleSection";
-import ServiceDetails from "@/components/ServiceDetails";
 import OurStory from "@/components/OurStory";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -17,13 +15,11 @@ const Index = () => {
       <Navbar />
       <Hero />
       <BrandMarquee />
-      <SocialProof />
+      <CategorySection />
       <HowItWorks />
+      <PaymentMethods />
       <TrustSection />
-      <LifestyleSection />
-      <ServiceDetails />
       <OurStory />
-      <FinalCTA />
       <Footer />
       <WhatsAppButton />
     </div>
