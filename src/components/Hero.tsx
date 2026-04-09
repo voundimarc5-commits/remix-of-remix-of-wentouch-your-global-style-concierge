@@ -52,7 +52,7 @@ const Hero = () => {
             </div>
             <div className="w-px h-10 bg-border" />
             <div>
-              <p className="font-display text-2xl font-semibold text-foreground">7-14j</p>
+              <p className="font-display text-2xl font-semibold text-foreground">3-7j</p>
               <p className="text-xs text-muted-foreground uppercase tracking-wide">
                 Délai livraison
               </p>
