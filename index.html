@@ -146,7 +146,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 @keyframes fadU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 /* rv reveals — only applied via JS observer */
-.rv:not(.ok){opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.rv:not(.ok){opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .rv.ok{opacity:1;transform:none}
 
 /* ── PROCESS CARDS (marble bg) ─────────────────────── */
@@ -238,8 +238,9 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .sb-arrow{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1px solid rgba(184,148,44,.35);color:var(--gold-l);font-size:13px;margin-top:auto;transition:transform .22s,background .22s}
 .split-btn:hover .sb-arrow{transform:translateX(3px);background:rgba(184,148,44,.12)}
 .sp-content{max-width:440px;margin:0 auto;padding:28px 20px 100px}
-.sp-section{margin-bottom:28px;opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.sp-section{margin-bottom:28px;opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .sp-section.visible{opacity:1;transform:translateY(0)}
+.sp-section:nth-child(2){transition-delay:.1s}.sp-section:nth-child(3){transition-delay:.2s}.sp-section:nth-child(4){transition-delay:.25s}.sp-section:nth-child(5){transition-delay:.3s}
 .sp-card{background:var(--white);border:1px solid var(--beige-3);border-radius:16px;padding:22px 20px;overflow:hidden}
 .sp-card img,.wp-logo-card img{max-width:100%;height:auto;display:block;border-radius:10px}
 .wp-logo-card{background:var(--beige);border-radius:10px;padding:10px;overflow:hidden}
@@ -417,10 +418,19 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .flinks a:hover{color:var(--gold-l)}
 .fbottom{border-top:1px solid rgba(201,168,76,.08);padding-top:18px;font-size:12px;color:rgba(255,255,255,.22)}
 
-/* REVEALS */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+/* REVEALS — enhanced progressive */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv.ok{opacity:1;transform:none}
-.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}.rv-d4{transition-delay:.48s}.rv-d5{transition-delay:.6s}
+/* Slide-from-left variant */
+.rv-left:not(.ok){opacity:0;transform:translateX(-30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-left.ok{opacity:1;transform:none}
+/* Slide-from-right variant */
+.rv-right:not(.ok){opacity:0;transform:translateX(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-right.ok{opacity:1;transform:none}
+/* Scale-up variant */
+.rv-scale:not(.ok){opacity:0;transform:scale(.92);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-scale.ok{opacity:1;transform:none}
 /* Force visibility on home page sections that get stuck */
 .bridge .rv,.bridge-line,#categories .rv,#categories .ccard,.split-entry .rv,.split-btn,#process-section .rv,.proc-step,.cta-ecrin .rv,.cta-ecrin h2,.cta-ecrin p,.cta-ecrin a{opacity:1!important;transform:none!important}
 
@@ -979,10 +989,10 @@ function buildMQ(){
 /* ═══════════════════════════════════════════════════════════
    SCROLL REVEAL
    ═══════════════════════════════════════════════════════ */
-document.querySelectorAll('.rv').forEach(el=>{
+document.querySelectorAll('.rv,.rv-left,.rv-right,.rv-scale').forEach(el=>{
   new IntersectionObserver(([e])=>{
-    if(e.isIntersecting) e.target.classList.add('ok');
-  },{threshold:.1}).observe(el);
+    if(e.isIntersecting){ e.target.classList.add('ok'); }
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'}).observe(el);
 });
 
 /* ═══════════════════════════════════════════════════════════
@@ -1169,10 +1179,10 @@ buildMQ();
 })();
 
 /* ENHANCED SCROLL REVEALS — re-observe new elements */
-document.querySelectorAll('.rv:not(.ok)').forEach(el=>{
+document.querySelectorAll('.rv:not(.ok),.rv-left:not(.ok),.rv-right:not(.ok),.rv-scale:not(.ok)').forEach(el=>{
   new IntersectionObserver(([e])=>{
     if(e.isIntersecting) e.target.classList.add('ok');
-  },{threshold:.1}).observe(el);
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'}).observe(el);
 });
 
 /* HOME STICKY BAR — show after scrolling past hero */
