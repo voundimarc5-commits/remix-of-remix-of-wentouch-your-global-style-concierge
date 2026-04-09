@@ -1,32 +1,34 @@
-import { User, Users, Baby } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = [
   {
-    icon: Users,
     title: "Homme",
     description: "Mode, accessoires, tech & lifestyle",
     link: "/homme",
+    image: "/_img/e1.jpg",
+    num: "01",
   },
   {
-    icon: User,
     title: "Femme",
     description: "Mode, beauté, accessoires & maroquinerie",
     link: "/femme",
+    image: "/_img/femme_a.jpg",
+    num: "02",
   },
   {
-    icon: Baby,
     title: "Bébé",
     description: "Vêtements, jouets & puériculture",
     link: "/bebe",
+    image: "/_img/enfants_a.jpg",
+    num: "03",
   },
 ];
 
 const CategorySection = () => {
   return (
-    <section className="py-20 md:py-24 bg-background">
+    <section className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-12">
+        <div className="max-w-2xl mb-14">
           <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium mb-4">
             Pour toute la famille
           </p>
@@ -35,22 +37,48 @@ const CategorySection = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-4xl">
-          {categories.map((category) => (
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-5">
+          {categories.map((category, index) => (
             <Link
               key={category.title}
               to={category.link}
-              className="bg-card rounded-xl p-7 shadow-luxury hover:shadow-luxury-hover hover:-translate-y-[3px] transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer"
+              className={`group relative overflow-hidden rounded-xl border border-border hover:border-primary/30 transition-all duration-500 ${
+                index === 0
+                  ? "md:col-span-7 aspect-[4/5] md:aspect-[16/11]"
+                  : index === 1
+                  ? "md:col-span-5 aspect-[4/5]"
+                  : "md:col-span-5 md:col-start-4 aspect-[4/5] md:aspect-square"
+              }`}
             >
-              <div className="w-14 h-14 rounded-lg bg-gradient-gold flex items-center justify-center mb-5">
-                <category.icon className="w-7 h-7 text-primary-foreground" />
+              {/* Image */}
+              <img
+                src={category.image}
+                alt={category.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[30%] group-hover:grayscale-0"
+              />
+
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-primary/70 font-medium">
+                  {category.num}
+                </span>
+                <h3 className="font-display text-2xl md:text-3xl font-medium text-white">
+                  {category.title}
+                </h3>
+                <p className="text-sm text-white/60 mt-1">
+                  {category.description}
+                </p>
+                <div className="mt-3 flex items-center gap-3">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-white/80 group-hover:text-primary transition-colors duration-300">
+                    Explorer
+                  </span>
+                  <div className="h-px w-6 bg-primary/40 transition-all duration-500 group-hover:w-12 group-hover:bg-primary" />
+                </div>
               </div>
-              <h3 className="font-display text-xl font-medium mb-2 text-foreground text-left">
-                {category.title}
-              </h3>
-              <p className="text-muted-foreground text-sm text-left">
-                {category.description}
-              </p>
             </Link>
           ))}
         </div>
