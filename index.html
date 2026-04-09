@@ -146,7 +146,8 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 @keyframes fadU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .htag,.hero h1,.hero-sub,.hero-ctas,.hero-stats{animation:fadU .6s ease both}
 .hero h1{animation-delay:.1s}.hero-sub{animation-delay:.2s}.hero-ctas{animation-delay:.3s}.hero-stats{animation-delay:.4s}
-.rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+/* rv reveals — only applied via JS observer */
+.rv:not(.ok){opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 .rv.ok{opacity:1;transform:none}
 
 /* ── PROCESS CARDS (marble bg) ─────────────────────── */
