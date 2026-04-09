@@ -24,34 +24,31 @@ const categories = [
 
 const CategorySection = () => {
   return (
-    <section className="py-16 md:py-20 bg-background">
+    <section className="py-20 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="max-w-2xl mb-12">
           <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium mb-4">
             Pour toute la famille
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-medium mb-4 text-foreground">
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-foreground text-left">
             Nos <span className="text-gradient-gold">catégories</span>
           </h2>
-          <p className="text-muted-foreground">
-            Commandez pour vous, votre partenaire ou vos enfants
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5 max-w-4xl">
           {categories.map((category) => (
             <Link
               key={category.title}
               to={category.link}
-              className="bg-card rounded-2xl p-8 text-center shadow-luxury hover:shadow-luxury-hover transition-all duration-300 border border-border hover:border-primary/30 hover:scale-105 cursor-pointer"
+              className="bg-card rounded-xl p-7 shadow-luxury hover:shadow-luxury-hover hover:-translate-y-[3px] transition-all duration-300 border border-border hover:border-primary/30 cursor-pointer"
             >
-              <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-gold flex items-center justify-center mb-5">
-                <category.icon className="w-8 h-8 text-primary-foreground" />
+              <div className="w-14 h-14 rounded-lg bg-gradient-gold flex items-center justify-center mb-5">
+                <category.icon className="w-7 h-7 text-primary-foreground" />
               </div>
-              <h3 className="font-display text-xl font-medium mb-2 text-foreground">
+              <h3 className="font-display text-xl font-medium mb-2 text-foreground text-left">
                 {category.title}
               </h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm text-left">
                 {category.description}
               </p>
             </Link>
