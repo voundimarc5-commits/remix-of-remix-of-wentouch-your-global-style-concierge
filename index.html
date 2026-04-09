@@ -368,7 +368,9 @@ section{padding:40px 24px}
 /* PROCESS — editorial, 3 steps, airy */
 #process-section{background:var(--white);border-top:1px solid var(--beige-3);padding:80px 24px}
 .proc-grid{display:flex;flex-direction:column;gap:0}
-.proc-step{padding:32px 0;border-bottom:1px solid var(--beige-3);display:flex;gap:20px;align-items:flex-start}
+.proc-step{padding:32px 0;border-bottom:1px solid var(--beige-3);display:flex;gap:20px;align-items:center}
+.proc-arrow{margin-left:auto;color:var(--gold);font-size:22px;opacity:.5;transition:all .3s;flex-shrink:0}
+.proc-step:hover .proc-arrow{opacity:1;transform:translateX(4px)}
 .proc-step:last-child{border-bottom:none}
 .proc-num{font-family:var(--fd);font-size:36px;font-weight:300;color:var(--gold);line-height:1;flex-shrink:0;width:40px}
 .proc-text h3{font-family:var(--fd);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:6px;line-height:1.3}
@@ -570,18 +572,21 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
       <div class="proc-text">
         <h3>Envoyez le lien du produit</h3>
       </div>
+      <span class="proc-arrow">→</span>
     </div>
     <div class="proc-step" style="cursor:pointer" onclick="showSubpage('recevez-votre-devis');return false">
       <div class="proc-num">2</div>
       <div class="proc-text">
         <h3>Recevez votre devis complet</h3>
       </div>
+      <span class="proc-arrow">→</span>
     </div>
     <div class="proc-step" style="cursor:pointer" onclick="showSubpage('payez-en-securite');return false">
       <div class="proc-num">3</div>
       <div class="proc-text">
         <h3>Recevez votre commande chez vous</h3>
       </div>
+      <span class="proc-arrow">→</span>
     </div>
   </div>
 </section>
