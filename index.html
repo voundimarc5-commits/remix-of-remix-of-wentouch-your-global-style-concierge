@@ -310,8 +310,38 @@ nav.scrolled .logo{font-size:22px}
 .hero-stats{display:none}
 
 
+
+/* ── INTEGRATED HERO LOGO ANIMATION ──────────────────────── */
+.hero-logo-anim{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;display:flex;align-items:baseline;white-space:nowrap}
+.logo-w{font-family:var(--fd,'Cormorant Garamond',Georgia,serif);transform:scale(.9);font-size:clamp(80px,16vw,160px);font-weight:300;color:#B8942C;opacity:0;will-change:transform,opacity;line-height:1;letter-spacing:.02em}
+.logo-en{font-family:var(--fd,'Cormorant Garamond',Georgia,serif);transform:translateX(-8px);font-size:clamp(80px,16vw,160px);font-weight:300;color:var(--ink,#1A1814);opacity:0;will-change:transform,opacity;line-height:1;letter-spacing:.02em;margin-left:-0.02em}
+.logo-touch{font-family:var(--fd,'Cormorant Garamond',Georgia,serif);transform:translateX(-12px);font-size:clamp(80px,16vw,160px);font-weight:300;color:#B8942C;opacity:0;will-change:transform,opacity;line-height:1;letter-spacing:.02em}
+
+/* Hero content initially hidden — revealed after logo settles */
+.hero-c,.scroll-hint{opacity:0;transform:translateY(16px);transition:none}
+.hero-c.revealed{opacity:1;transform:translateY(0);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.scroll-hint.revealed{opacity:1;transform:translateX(-50%) translateY(0);transition:opacity .6s .2s cubic-bezier(.22,1,.36,1),transform .6s .2s cubic-bezier(.22,1,.36,1)}
+
+/* Hero image initial state for animation */
+.hero-img{opacity:0;transform:scale(1.02);transition:none}
+.hero-img.revealed{opacity:1;transform:scale(1);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1)}
+
+/* Ambient light overlay shift */
+.hero-ov{transition:background 2s ease}
+.hero-ov.warmed{background:linear-gradient(to bottom,rgba(26,24,20,.2) 0%,rgba(26,24,20,.52) 40%,rgba(26,24,20,.84) 100%)}
+
+/* Nav hidden during animation */
+nav.anim-hidden{opacity:0;transform:translateY(-10px);transition:none;pointer-events:none}
+nav.anim-revealed{opacity:1;transform:translateY(0);transition:opacity .5s .2s ease,transform .5s .2s ease;pointer-events:auto}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-img,.hero-c,.scroll-hint,.logo-w,.logo-en,.logo-touch{opacity:1!important;transform:none!important;transition:none!important}
+  .hero-logo-anim{display:none!important}
+  nav{opacity:1!important;transform:none!important;pointer-events:auto!important}
+}
+
 /* SCROLL CUE */
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:scrollHintIn .6s 1.2s ease both}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%) translateY(8px);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px}
 .scroll-hint-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(201,168,76,.5),transparent);animation:scrollPulse 2.5s ease infinite}
 @keyframes scrollHintIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%)}}
 @keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.8;transform:scaleY(1.1)}}
@@ -454,6 +484,11 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 <section class="hero">
   <img class="hero-img" src="_img/gallery-hero.jpg" alt="Galleria Vittorio Emanuele II">
   <div class="hero-ov"></div>
+  <!-- INTEGRATED LOGO ANIMATION -->
+  <div id="hero-logo-anim" class="hero-logo-anim">
+    <span class="logo-w">W</span><span class="logo-en">en</span><span class="logo-touch">touch</span>
+  </div>
+
   <div class="hero-c">
     <p class="htag">Conciergerie Shopping Premium</p>
    <h1>Le luxe européen,<br><em>livré chez vous.</em></h1>
@@ -975,79 +1010,81 @@ function goBack(){
 }
 
 
-/* ═══════ INTRO SEQUENCE ═══════ */
+/* ═══════ INTEGRATED HERO ANIMATION ═══════ */
 (function(){
-  var spacer=document.getElementById('intro-spacer');
-  var ov=document.getElementById('intro-overlay');
-  var skip=document.getElementById('intro-skip');
-  if(!spacer||!ov){return;}
-  if(sessionStorage.getItem('wt-intro')){spacer.remove();ov.remove();if(skip)skip.remove();return;}
-  var w=ov.querySelector('.intro-w');
-  var tag=ov.querySelector('.intro-tag');
-  var glow=ov.querySelector('.intro-glow');
-  var beam=ov.querySelector('.intro-beam');
-  var frames=ov.querySelectorAll('.intro-frame');
-  var done=false,ticking=false;
-  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
-  function cl(v,a,b){return Math.max(a,Math.min(b,v));}
-  function mp(v,a,b){return cl((v-a)/(b-a),0,1);}
-  function update(){
-    if(done)return;
-    var rect=spacer.getBoundingClientRect();
-    var total=spacer.offsetHeight-window.innerHeight;
-    var p=cl(-rect.top/total,0,1);
-    /* glow */
-    glow.style.opacity=ease(mp(p,0,.15));
-    /* corridor frames */
-    for(var i=0;i<frames.length;i++){
-      var d=i*.03;
-      frames[i].style.opacity=ease(mp(p,d,.15+d))*(1-ease(mp(p,.7,.9)));
-      frames[i].style.transform='translate(-50%,-50%) scale('+(1+p*(.3+i*.2))+')';
-    }
-    /* beam */
-    var bp=ease(mp(p,.05,.25));
-    beam.style.height=(bp*45)+'vh';
-    beam.style.opacity=bp*(1-ease(mp(p,.6,.85)));
-    /* W lettermark */
-    var wp=ease(mp(p,.18,.4));
-    var wf=1-ease(mp(p,.72,.92));
-    w.style.opacity=wp*wf;
-    w.style.transform='translateY('+(25*(1-wp)-40*ease(mp(p,.72,.92)))+'px)';
-    /* tagline */
-    var tp=ease(mp(p,.35,.5));
-    var tf=1-ease(mp(p,.68,.88));
-    tag.style.opacity=tp*tf*.6;
-    tag.style.transform='translateY('+(12*(1-tp)-20*ease(mp(p,.68,.88)))+'px)';
-    /* overlay dissolve */
-    var ep=ease(mp(p,.85,1));
-    ov.style.opacity=1-ep;
-    ov.style.transform='translateY('+(-ep*60)+'px)';
-    if(p>=.99)finish();
-  }
-  function finish(){
-    if(done)return;done=true;
-    sessionStorage.setItem('wt-intro','1');
-    ov.style.transition='opacity .35s ease,transform .35s ease';
-    ov.style.opacity='0';ov.style.transform='translateY(-60px)';
-    if(skip){skip.style.transition='opacity .2s';skip.style.opacity='0';}
-    setTimeout(function(){
-      ov.remove();if(skip)skip.remove();
-      spacer.style.height='0';spacer.style.overflow='hidden';
-      window.scrollTo(0,0);
-      /* Re-observe all rv elements after intro collapse */
-      document.querySelectorAll('.rv:not(.ok)').forEach(function(el){
-        new IntersectionObserver(function(entries){
-          if(entries[0].isIntersecting) entries[0].target.classList.add('ok');
-        },{threshold:.1}).observe(el);
-      });
-    },380);
-  }
-  if(skip)skip.addEventListener('click',finish);
-  window.addEventListener('scroll',function(){
-    if(!ticking){requestAnimationFrame(function(){update();ticking=false;});ticking=true;}
-  },{passive:true});
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)finish();
-  update();
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+  var img = document.querySelector('.hero-img');
+  var ov = document.querySelector('.hero-ov');
+  var heroC = document.querySelector('.hero-c');
+  var hint = document.querySelector('.scroll-hint');
+  var nav = document.getElementById('main-nav');
+  var logoAnim = document.getElementById('hero-logo-anim');
+  var wEl = document.querySelector('.logo-w');
+  var enEl = document.querySelector('.logo-en');
+  var touchEl = document.querySelector('.logo-touch');
+
+  if(!logoAnim || !wEl) return;
+
+  // Hide nav during animation
+  if(nav) nav.classList.add('anim-hidden');
+
+  // Phase 1: Background fade-in (0s → 0.4s)
+  setTimeout(function(){
+    if(img) img.classList.add('revealed');
+  }, 50);
+
+  // Phase 2: W appears (0.4s → 1.2s)
+  setTimeout(function(){
+    wEl.style.transition = 'opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)';
+    wEl.style.opacity = '1';
+    wEl.style.transform = 'scale(1)';
+  }, 400);
+
+  // Phase 3: W rotation (1.2s → 2.0s)
+  setTimeout(function(){
+    wEl.style.transition = 'transform .8s cubic-bezier(.4,0,.2,1)';
+    wEl.style.transform = 'rotate(360deg) scale(1.03)';
+  }, 1200);
+
+  // Phase 4: Lock-in (2.0s → 2.6s)
+  setTimeout(function(){
+    wEl.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1), color .5s ease';
+    wEl.style.transform = 'rotate(360deg) scale(1)';
+    wEl.style.color = '#1A1814';
+    // Subtle ambient shift
+    if(ov) ov.classList.add('warmed');
+  }, 2000);
+
+  // Phase 5: Word reveal (2.6s → 3.6s)
+  setTimeout(function(){
+    enEl.style.transition = 'opacity .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1)';
+    enEl.style.opacity = '1';
+    enEl.style.transform = 'translateX(0)';
+  }, 2600);
+
+  setTimeout(function(){
+    touchEl.style.transition = 'opacity .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1)';
+    touchEl.style.opacity = '1';
+    touchEl.style.transform = 'translateX(0)';
+  }, 2800);
+
+  // Fade out logo animation, reveal hero content (3.6s → 4.4s)
+  setTimeout(function(){
+    logoAnim.style.transition = 'opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)';
+    logoAnim.style.opacity = '0';
+    logoAnim.style.transform = 'translate(-50%,-50%) scale(.97)';
+  }, 3600);
+
+  setTimeout(function(){
+    if(heroC) heroC.classList.add('revealed');
+    if(nav){ nav.classList.remove('anim-hidden'); nav.classList.add('anim-revealed'); }
+  }, 3900);
+
+  setTimeout(function(){
+    if(hint) hint.classList.add('revealed');
+    if(logoAnim) logoAnim.style.display = 'none';
+  }, 4200);
 })();
 
 buildMQ();
