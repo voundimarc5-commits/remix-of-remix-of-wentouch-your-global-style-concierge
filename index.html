@@ -374,17 +374,27 @@ section{padding:40px 24px}
 .ssub{font-size:14px;color:var(--ink-3);line-height:1.7;margin-bottom:32px;max-width:380px}
 
 /* CATEGORY CARDS */
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.ccard{border-radius:18px;overflow:hidden;cursor:pointer;text-decoration:none;position:relative;display:block;aspect-ratio:4/5;-webkit-tap-highlight-color:transparent;transition:transform .35s ease,box-shadow .35s ease}
-.ccard:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(26,24,20,.12)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ccard{border-radius:14px;overflow:hidden;cursor:pointer;text-decoration:none;position:relative;display:block;aspect-ratio:4/5;-webkit-tap-highlight-color:transparent;transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s ease}
+.ccard:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(26,24,20,.15)}
 .ccard:active{transform:scale(.98)}
 .ccard.wide{grid-column:span 2;aspect-ratio:2/1}
-.ccard-img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;display:block}
-.ccard:hover .ccard-img{transform:scale(1.04)}
-.ccard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,.78) 0%,rgba(26,24,20,.02) 60%)}
-.ccard-lbl{position:absolute;bottom:0;left:0;right:0;padding:22px 20px}
-.cname{font-family:var(--fd);font-size:22px;font-weight:500;color:#fff;line-height:1.2;margin-bottom:3px}
-.ccnt{font-size:11px;color:rgba(255,255,255,.5)}
+.ccard.hero-card{grid-column:1/-1;aspect-ratio:16/10;min-height:320px}
+.ccard.tall{aspect-ratio:3/5}
+.ccard-img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.23,1,.32,1);display:block;filter:grayscale(20%)}
+.ccard:hover .ccard-img{transform:scale(1.06);filter:grayscale(0%)}
+.ccard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,6,.82) 0%,rgba(10,8,6,.15) 50%,rgba(10,8,6,.02) 100%);transition:opacity .5s}
+.ccard:hover .ccard-ov{background:linear-gradient(to top,rgba(10,8,6,.85) 0%,rgba(10,8,6,.1) 55%,rgba(10,8,6,0) 100%)}
+.ccard-lbl{position:absolute;bottom:0;left:0;right:0;padding:24px 22px;transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.ccard:hover .ccard-lbl{transform:translateY(-4px)}
+.ccard-num{font-size:10px;letter-spacing:.25em;color:var(--gold);opacity:.7;margin-bottom:6px;font-weight:500}
+.cname{font-family:var(--fd);font-size:24px;font-weight:500;color:#fff;line-height:1.15;margin-bottom:4px}
+.ccnt{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.02em}
+.ccard-arrow{display:flex;align-items:center;gap:8px;margin-top:10px;opacity:0;transform:translateY(6px);transition:all .4s cubic-bezier(.23,1,.32,1)}
+.ccard:hover .ccard-arrow{opacity:1;transform:translateY(0)}
+.ccard-arrow span{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:500}
+.ccard-arrow-line{width:20px;height:1px;background:var(--gold);transition:width .5s ease}
+.ccard:hover .ccard-arrow-line{width:36px}
 
 /* PROCESS — editorial, 3 steps, airy */
 #process-section{background:var(--white);border-top:1px solid var(--beige-3);padding:80px 24px}
@@ -459,8 +469,11 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   .bridge{padding:60px 48px}
   .bridge h2{font-size:44px}
   section,#process-section{padding:56px 48px}
-  .cgrid{grid-template-columns:1fr 1fr 1fr;gap:18px}
-  .ccard.wide{grid-column:span 2}
+  .cgrid{grid-template-columns:7fr 5fr;gap:14px;grid-auto-rows:auto}
+  .ccard.hero-card{grid-column:1;grid-row:1/3;aspect-ratio:auto;min-height:480px}
+  .ccard.wide{grid-column:span 1}
+  .ccard-num{font-size:11px}
+  .cname{font-size:26px}
   .proc-grid{max-width:540px}
   .cta-ecrin{padding:120px 48px}
   footer{padding:64px 48px 40px}
@@ -472,6 +485,9 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   .bridge{padding:70px 80px}
   .bridge h2{font-size:52px}
   section,#process-section{padding:64px 80px;max-width:1200px;margin:0 auto}
+  .cgrid{gap:16px}
+  .ccard.hero-card{min-height:540px}
+  .cname{font-size:28px}
   .proc-grid{max-width:600px}
   .cta-ecrin{padding:160px 80px}
 }
@@ -539,33 +555,65 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <h2 class="stitle rv rv-d2">Mode, beauté, tech, <em>luxe</em></h2>
   <p class="ssub rv rv-d3">Tout ce que l'Europe a de mieux, livré chez vous.</p>
   <div class="cgrid">
-    <a class="ccard wide" href="#" onclick="gocat('femme');return false">
+    <a class="ccard hero-card" href="#" onclick="gocat('femme');return false">
       <img class="ccard-img" src="femmes.png" alt="Femmes" loading="lazy">
       <div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Femmes</div><div class="ccnt">Mode · Beauté · Skincare · Bijoux</div></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">01</div>
+        <div class="cname">Femmes</div>
+        <div class="ccnt">Mode · Beauté · Skincare · Bijoux</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
     <a class="ccard" href="#" onclick="gocat('hommes');return false">
       <img class="ccard-img" src="hommes.png" alt="Hommes" loading="lazy">
       <div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Hommes</div><div class="ccnt">Mode · Sport · Horlogerie · Luxe</div></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">02</div>
+        <div class="cname">Hommes</div>
+        <div class="ccnt">Mode · Sport · Horlogerie · Luxe</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
     <a class="ccard" href="#" onclick="gocat('enfants');return false">
       <img class="ccard-img" src="enfant.png" alt="Enfants" loading="lazy">
       <div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Enfants</div><div class="ccnt">Vêtements · Premium</div></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">03</div>
+        <div class="cname">Enfants</div>
+        <div class="ccnt">Vêtements · Premium</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
-    <a class="ccard wide" href="#" onclick="gocat('luxe');return false">
+    <a class="ccard hero-card" href="#" onclick="gocat('luxe');return false">
       <img class="ccard-img" src="luxe.jpg" alt="Luxe" loading="lazy">
       <div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Luxe</div><div class="ccnt">Chanel · Dior · LV · Hermès · Prada · Gucci</div></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">04</div>
+        <div class="cname">Luxe</div>
+        <div class="ccnt">Chanel · Dior · LV · Hermès · Prada · Gucci</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
     <a class="ccard" href="#" onclick="gocat('tech');return false">
-      <img class="ccard-img" src="tech.png" alt="Tech" loading="lazy" style="object-position:center"><div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Tech</div><div class="ccnt">Apple · Samsung · Sony · Dell</div></div>
+      <img class="ccard-img" src="tech.png" alt="Tech" loading="lazy" style="object-position:center">
+      <div class="ccard-ov"></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">05</div>
+        <div class="cname">Tech</div>
+        <div class="ccnt">Apple · Samsung · Sony · Dell</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
     <a class="ccard" href="#" onclick="gocat('maison');return false">
-      <img class="ccard-img" src="maison.jpg" alt="Maison" loading="lazy" style="object-position:center"><div class="ccard-ov"></div>
-      <div class="ccard-lbl"><div class="cname">Maison & Électro</div><div class="ccnt">Tefal · Bosch · Moulinex · Beko</div></div>
+      <img class="ccard-img" src="maison.jpg" alt="Maison" loading="lazy" style="object-position:center">
+      <div class="ccard-ov"></div>
+      <div class="ccard-lbl">
+        <div class="ccard-num">06</div>
+        <div class="cname">Maison & Électro</div>
+        <div class="ccnt">Tefal · Bosch · Moulinex · Beko</div>
+        <div class="ccard-arrow"><span>Explorer</span><div class="ccard-arrow-line"></div></div>
+      </div>
     </a>
   </div>
 </section>
