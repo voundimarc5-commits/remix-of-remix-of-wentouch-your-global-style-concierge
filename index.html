@@ -113,10 +113,11 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .page{display:none}
 .page.active{display:block}
 .chero{position:relative;height:220px;overflow:hidden}
-.chero-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.chero-bg{width:100%;height:100%;position:absolute;inset:0}
+.chero-img{width:100%;height:110%;object-fit:cover;object-position:center top;display:block;will-change:transform;transition:transform .1s linear}
+.chero-bg{width:100%;height:110%;position:absolute;inset:0}
 .chero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,24,20,.1),rgba(26,24,20,.72))}
-.chero-cnt{position:absolute;bottom:0;left:0;right:0;padding:18px 20px 20px}
+.chero-cnt{position:absolute;bottom:0;left:0;right:0;padding:18px 20px 20px;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1) .2s,transform .6s cubic-bezier(.16,1,.3,1) .2s}
+.chero-cnt.visible{opacity:1;transform:translateY(0)}
 .chero-cnt h1{font-family:var(--fd);font-size:32px;font-weight:400;color:#fff;line-height:1.1;margin-bottom:4px}
 .chero-cnt p{font-size:13px;color:rgba(255,255,255,.65)}
 .back{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;font-family:var(--fb);font-size:13px;color:rgba(255,255,255,.7);padding:0 0 10px;text-decoration:none}
@@ -432,10 +433,12 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .rv-scale:not(.ok){opacity:0;transform:scale(.92);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .rv-scale.ok{opacity:1;transform:none}
 /* Force visibility on home page sections that get stuck */
-.bridge .rv,.bridge-line,#categories .rv,#categories .ccard,.split-entry .rv,.split-btn,#process-section .rv,.proc-step,.cta-ecrin .rv,.cta-ecrin h2,.cta-ecrin p,.cta-ecrin a{opacity:1!important;transform:none!important}
+.bridge.rv-scale,.bridge .rv,.bridge-line,#categories.rv,#categories .rv,#categories .ccard,.split-entry.rv-left,.split-entry .rv,.split-btn,#process-section.rv,#process-section .rv,.proc-step.rv-right,.cta-ecrin .rv,.cta-ecrin h2,.cta-ecrin p,.cta-ecrin a{opacity:1!important;transform:none!important}
 
 /* GLOBAL STICKY BAR */
-.home-sticky{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(26,24,20,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(184,148,44,.18);padding:10px 20px;text-align:center;font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;transform:translateY(100%);transition:transform .4s ease}
+.home-sticky{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(26,24,20,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(184,148,44,.18);padding:10px 20px;text-align:center;font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;transform:translateY(100%);transition:transform .4s ease}
+.home-sticky span{display:inline-block;animation:stickyPulse 3s ease-in-out infinite}
+@keyframes stickyPulse{0%,100%{opacity:.55;filter:blur(0)}50%{opacity:1;filter:blur(0)}}
 .home-sticky.visible{transform:translateY(0)}
 
 /* UX BUTTON HOVER */
@@ -523,19 +526,19 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 <div class="mq-wrap"><div id="mq" class="mq-track"></div></div>
 
 <!-- BRIDGE — editorial statement -->
-<div class="bridge">
+<div class="bridge rv-scale">
   <div class="bridge-inner">
     <div class="bridge-line"></div>
-    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Déjà utilisé par des clients exigeants au Cameroun</p>
-    <h2>L'Europe,<br><em>sans le voyage.</em></h2>
-    <p>Accédez à ce que les autres ne peuvent pas. WenTouch crée le lien entre les boutiques européennes et vous.</p>
+    <p class="rv rv-d1" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Déjà utilisé par des clients exigeants au Cameroun</p>
+    <h2 class="rv rv-d2">L'Europe,<br><em>sans le voyage.</em></h2>
+    <p class="rv rv-d3">Accédez à ce que les autres ne peuvent pas. WenTouch crée le lien entre les boutiques européennes et vous.</p>
   </div>
 </div>
 
-<section id="categories">
-  <p class="slbl">Explorez l'univers</p>
-  <h2 class="stitle">Mode, beauté, tech, <em>luxe</em></h2>
-  <p class="ssub">Tout ce que l'Europe a de mieux, livré chez vous.</p>
+<section id="categories" class="rv">
+  <p class="slbl rv rv-d1">Explorez l'univers</p>
+  <h2 class="stitle rv rv-d2">Mode, beauté, tech, <em>luxe</em></h2>
+  <p class="ssub rv rv-d3">Tout ce que l'Europe a de mieux, livré chez vous.</p>
   <div class="cgrid">
     <a class="ccard wide" href="#" onclick="gocat('femme');return false">
       <img class="ccard-img" src="femmes.png" alt="Femmes" loading="lazy">
@@ -569,7 +572,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 </section>
 
 <!-- SPLIT ENTRY -->
-<div class="split-entry">
+<div class="split-entry rv-left">
   <a class="split-btn" href="#" onclick="showSubpage('vogue');return false">
     <span class="sb-tag">Editorial</span>
     <span class="sb-title">En <em>Vogue</em></span>
@@ -584,26 +587,26 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   </a>
 </div>
 
-<section id="process-section">
-  <p class="slbl">Comment ça fonctionne</p>
-  <h2 class="stitle">Trois étapes. <em>C'est tout.</em></h2>
+<section id="process-section" class="rv">
+  <p class="slbl rv rv-d1">Comment ça fonctionne</p>
+  <h2 class="stitle rv rv-d2">Trois étapes. <em>C'est tout.</em></h2>
 
   <div class="proc-grid">
-    <div class="proc-step" style="cursor:pointer" onclick="showSubpage('partagez-le-lien');return false">
+     <div class="proc-step rv-right rv-d1" style="cursor:pointer" onclick="showSubpage('partagez-le-lien');return false">
       <div class="proc-num">1</div>
       <div class="proc-text">
         <h3>Envoyez le lien du produit</h3>
       </div>
       <span class="proc-arrow">→</span>
     </div>
-    <div class="proc-step" style="cursor:pointer" onclick="showSubpage('recevez-votre-devis');return false">
+    <div class="proc-step rv-right rv-d2" style="cursor:pointer" onclick="showSubpage('recevez-votre-devis');return false">
       <div class="proc-num">2</div>
       <div class="proc-text">
         <h3>Recevez votre devis complet</h3>
       </div>
       <span class="proc-arrow">→</span>
     </div>
-    <div class="proc-step" style="cursor:pointer" onclick="showSubpage('payez-en-securite');return false">
+    <div class="proc-step rv-right rv-d3" style="cursor:pointer" onclick="showSubpage('payez-en-securite');return false">
       <div class="proc-num">3</div>
       <div class="proc-text">
         <h3>Recevez votre commande chez vous</h3>
@@ -639,7 +642,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 </footer>
 
 <!-- STICKY BAR -->
-<div class="home-sticky" id="home-sticky">Livraison Europe → Cameroun en toute simplicité</div>
+<div class="home-sticky" id="home-sticky"><span>Livraison Europe → Cameroun en toute simplicité</span></div>
 
 </div>
 
@@ -1018,6 +1021,43 @@ function goBack(){
     if(el) el.scrollIntoView({behavior:'smooth'});
   },80);
 }
+
+/* CATEGORY HERO PARALLAX — subtle image movement on scroll in category pages */
+(function(){
+  const cheroImg = document.getElementById('chero-img');
+  const cheroBg = document.getElementById('chero-bg');
+  const chero = document.querySelector('.chero');
+  const cheroCnt = document.querySelector('.chero-cnt');
+  if(!chero) return;
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches) return;
+  /* reveal content on category open */
+  const origGocat = window.gocat;
+  if(origGocat){
+    window.gocat = function(key){
+      origGocat(key);
+      setTimeout(()=>{if(cheroCnt) cheroCnt.classList.add('visible');},50);
+    };
+  }
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const cp = document.getElementById('cp');
+        if(!cp || !cp.classList.contains('active')){ticking=false;return;}
+        const y = window.scrollY;
+        const h = chero.offsetHeight;
+        if(y < h * 1.5){
+          const parallax = y * 0.2;
+          const target = cheroImg.style.display !== 'none' ? cheroImg : cheroBg;
+          target.style.transform = 'translateY('+parallax+'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+})();
 
 
 /* ═══════ INTEGRATED HERO ANIMATION ═══════ */
