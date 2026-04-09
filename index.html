@@ -399,7 +399,8 @@ section{padding:40px 24px}
 /* PROCESS — editorial, 3 steps, airy */
 #process-section{background:var(--white);border-top:1px solid var(--beige-3);padding:80px 24px}
 .proc-grid{display:flex;flex-direction:column;gap:0}
-.proc-step{padding:32px 0;border-bottom:1px solid var(--beige-3);display:flex;gap:20px;align-items:center}
+.proc-step{padding:32px 0;border-bottom:1px solid var(--beige-3);display:flex;gap:20px;align-items:flex-start}
+.proc-sub{font-size:13px;color:var(--ink-3);line-height:1.5;margin-top:4px;opacity:.7}
 .proc-arrow{margin-left:auto;color:var(--gold);font-size:22px;opacity:.5;transition:all .3s;flex-shrink:0}
 .proc-step:hover .proc-arrow{opacity:1;transform:translateX(4px)}
 .proc-step:last-child{border-bottom:none}
@@ -642,6 +643,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
       <div class="proc-num">1</div>
       <div class="proc-text">
         <h3>Envoyez le lien du produit</h3>
+        <p class="proc-sub">Copiez le lien depuis n'importe quel site européen et envoyez-le-nous.</p>
       </div>
       <span class="proc-arrow">→</span>
     </div>
@@ -649,6 +651,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
       <div class="proc-num">2</div>
       <div class="proc-text">
         <h3>Recevez votre devis complet</h3>
+        <p class="proc-sub">Prix du produit, frais de livraison et commission — tout est transparent.</p>
       </div>
       <span class="proc-arrow">→</span>
     </div>
@@ -656,6 +659,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
       <div class="proc-num">3</div>
       <div class="proc-text">
         <h3>Recevez votre commande chez vous</h3>
+        <p class="proc-sub">Livraison en 3 à 7 jours ouvrés directement chez vous au Cameroun.</p>
       </div>
       <span class="proc-arrow">→</span>
     </div>
