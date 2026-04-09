@@ -1,5 +1,4 @@
 import heroImage from "@/assets/hero-family.jpg";
-import HeroRequestForm from "@/components/HeroRequestForm";
 
 const Hero = () => {
   return (
@@ -14,59 +13,50 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Content */}
-          <div className="max-w-xl animate-fade-up pt-8">
-            <p className="text-sm uppercase tracking-[0.25em] text-primary font-medium mb-6">
-              Conciergerie Shopping Premium
-            </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] mb-6 text-foreground">
-              Vous choisissez.{" "}
-              <span className="italic">Nous achetons.</span>{" "}
-              <span className="text-gradient-gold">Nous livrons.</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Service de conciergerie shopping Europe → Cameroun. 
-              Accédez aux plus grandes marques internationales depuis le confort de votre maison.
-            </p>
+      <div className="container mx-auto px-6 relative z-10 py-16 lg:py-28">
+        <div className="max-w-2xl animate-fade-up pt-8">
+          <p className="text-sm uppercase tracking-[0.25em] text-primary font-medium mb-6">
+            Conciergerie Shopping Premium
+          </p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] mb-6 text-foreground text-left">
+            Le luxe européen,{" "}
+            <span className="text-gradient-gold">livré chez vous.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 text-left max-w-lg">
+            Accédez aux plus grandes maisons sans voyager.
+            <br />
+            Nous nous occupons de tout, de l'achat à la livraison au Cameroun.
+          </p>
 
-            {/* Trust Badges */}
-            <div className="flex items-center gap-6 pt-6 border-t border-border/50">
-              <div className="text-center">
-                <p className="font-display text-2xl font-semibold text-foreground">Europe</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                  Achats directs
-                </p>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div className="text-center">
-                <p className="font-display text-2xl font-semibold text-foreground">50+</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                  Marques accessibles
-                </p>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div className="text-center">
-                <p className="font-display text-2xl font-semibold text-foreground">7-14j</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                  Délai livraison
-                </p>
-              </div>
-            </div>
-          </div>
+          <a
+            href="https://order.wentouch.shop"
+            className="inline-flex items-center justify-center bg-gradient-gold text-primary-foreground px-8 py-4 text-base font-medium rounded-lg transition-transform duration-200 hover:scale-[1.03]"
+          >
+            Commencer une commande
+          </a>
 
-          {/* Request Form */}
-          <div className="animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <div className="mb-4">
-            <h2 className="font-display text-xl font-medium text-foreground">
-                Décrivez votre commande
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Collez vos liens et précisez vos préférences
+          {/* Trust Badges */}
+          <div className="flex items-center gap-6 pt-10 mt-10 border-t border-border/50">
+            <div>
+              <p className="font-display text-2xl font-semibold text-foreground">Europe</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                Achats directs
               </p>
             </div>
-            <HeroRequestForm />
+            <div className="w-px h-10 bg-border" />
+            <div>
+              <p className="font-display text-2xl font-semibold text-foreground">50+</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                Marques accessibles
+              </p>
+            </div>
+            <div className="w-px h-10 bg-border" />
+            <div>
+              <p className="font-display text-2xl font-semibold text-foreground">7-14j</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                Délai livraison
+              </p>
+            </div>
           </div>
         </div>
       </div>
