@@ -146,7 +146,8 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 @keyframes fadU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .htag,.hero h1,.hero-sub,.hero-ctas,.hero-stats{animation:fadU .6s ease both}
 .hero h1{animation-delay:.1s}.hero-sub{animation-delay:.2s}.hero-ctas{animation-delay:.3s}.hero-stats{animation-delay:.4s}
-.rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+/* rv reveals — only applied via JS observer */
+.rv:not(.ok){opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 .rv.ok{opacity:1;transform:none}
 
 /* ── PROCESS CARDS (marble bg) ─────────────────────── */
@@ -397,6 +398,8 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .rv.ok{opacity:1;transform:none}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+/* Force visibility on home page sections that get stuck */
+.bridge .rv,.bridge-line,#categories .rv,#categories .ccard,.split-entry .rv,.split-btn,#process-section .rv,.proc-step,.cta-ecrin .rv,.cta-ecrin h2,.cta-ecrin p,.cta-ecrin a{opacity:1!important;transform:none!important}
 
 /* GLOBAL STICKY BAR */
 .home-sticky{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(26,24,20,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(184,148,44,.18);padding:10px 20px;text-align:center;font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;transform:translateY(100%);transition:transform .4s ease}
@@ -494,20 +497,20 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 <div class="mq-wrap"><div id="mq" class="mq-track"></div></div>
 
 <!-- BRIDGE — editorial statement -->
-<div class="bridge rv">
+<div class="bridge">
   <div class="bridge-inner">
-    <div class="bridge-line rv rv-d1"></div>
-    <p class="rv" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Déjà utilisé par des clients exigeants au Cameroun</p>
-    <h2 class="rv rv-d2">L'Europe,<br><em>sans le voyage.</em></h2>
-    <p class="rv rv-d3">Accédez à ce que les autres ne peuvent pas. WenTouch crée le lien entre les boutiques européennes et vous.</p>
+    <div class="bridge-line"></div>
+    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Déjà utilisé par des clients exigeants au Cameroun</p>
+    <h2>L'Europe,<br><em>sans le voyage.</em></h2>
+    <p>Accédez à ce que les autres ne peuvent pas. WenTouch crée le lien entre les boutiques européennes et vous.</p>
   </div>
 </div>
 
 <section id="categories">
-  <p class="slbl rv">Explorez l'univers</p>
-  <h2 class="stitle rv">Mode, beauté, tech, <em>luxe</em></h2>
-  <p class="ssub rv">Tout ce que l'Europe a de mieux, livré chez vous.</p>
-  <div class="cgrid rv">
+  <p class="slbl">Explorez l'univers</p>
+  <h2 class="stitle">Mode, beauté, tech, <em>luxe</em></h2>
+  <p class="ssub">Tout ce que l'Europe a de mieux, livré chez vous.</p>
+  <div class="cgrid">
     <a class="ccard wide" href="#" onclick="gocat('femme');return false">
       <img class="ccard-img" src="femmes.png" alt="Femmes" loading="lazy">
       <div class="ccard-ov"></div>
@@ -540,7 +543,7 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 </section>
 
 <!-- SPLIT ENTRY -->
-<div class="split-entry rv">
+<div class="split-entry">
   <a class="split-btn" href="#" onclick="showSubpage('vogue');return false">
     <span class="sb-tag">Editorial</span>
     <span class="sb-title">En <em>Vogue</em></span>
@@ -556,23 +559,23 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 </div>
 
 <section id="process-section">
-  <p class="slbl rv">Comment ça fonctionne</p>
-  <h2 class="stitle rv">Trois étapes. <em>C'est tout.</em></h2>
+  <p class="slbl">Comment ça fonctionne</p>
+  <h2 class="stitle">Trois étapes. <em>C'est tout.</em></h2>
 
-  <div class="proc-grid rv">
-    <div class="proc-step rv rv-d1">
+  <div class="proc-grid">
+    <div class="proc-step">
       <div class="proc-num">1</div>
       <div class="proc-text">
         <h3>Envoyez le lien du produit</h3>
       </div>
     </div>
-    <div class="proc-step rv rv-d2">
+    <div class="proc-step">
       <div class="proc-num">2</div>
       <div class="proc-text">
         <h3>Recevez votre devis complet</h3>
       </div>
     </div>
-    <div class="proc-step rv rv-d3">
+    <div class="proc-step">
       <div class="proc-num">3</div>
       <div class="proc-text">
         <h3>Recevez votre commande chez vous</h3>
@@ -1047,6 +1050,12 @@ function goBack(){
       ov.remove();if(skip)skip.remove();
       spacer.style.height='0';spacer.style.overflow='hidden';
       window.scrollTo(0,0);
+      /* Re-observe all rv elements after intro collapse */
+      document.querySelectorAll('.rv:not(.ok)').forEach(function(el){
+        new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting) entries[0].target.classList.add('ok');
+        },{threshold:.1}).observe(el);
+      });
     },380);
   }
   if(skip)skip.addEventListener('click',finish);
