@@ -398,6 +398,15 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 .rv.ok{opacity:1;transform:none}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
 
+/* GLOBAL STICKY BAR */
+.home-sticky{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(26,24,20,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(184,148,44,.18);padding:10px 20px;text-align:center;font-family:var(--fb);font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;transform:translateY(100%);transition:transform .4s ease}
+.home-sticky.visible{transform:translateY(0)}
+
+/* UX BUTTON HOVER */
+.btn-w:hover,.btn-n:hover,.btn-gold-glow:hover,.qlink-btn:hover{transform:scale(1.03) translateY(-1px)}
+/* UX CARD HOVER */
+.ccard:hover,.proc-step:hover,.step:hover{box-shadow:0 8px 32px rgba(26,24,20,.1);transform:translateY(-3px)}
+
 /* REDUCED MOTION */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -463,8 +472,8 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <div class="hero-ov"></div>
   <div class="hero-c">
     <p class="htag">Conciergerie Shopping Premium</p>
-    <h1>Vous choisissez.<br><em>Nous livrons.</em></h1>
-    <p class="hero-sub">Les plus grandes marques européennes, livrées chez vous au Cameroun. Un service simple, personnel et premium.</p>
+   <h1>Le luxe européen,<br><em>livré chez vous.</em></h1>
+   <p class="hero-sub">Accédez aux plus grandes maisons sans voyager. Nous nous occupons de tout, de l'achat à la livraison au Cameroun.</p>
     <div class="qlink">
       <span class="qlink-lbl">Commande rapide</span>
       <div class="qlink-row">
@@ -488,8 +497,9 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 <div class="bridge rv">
   <div class="bridge-inner">
     <div class="bridge-line rv rv-d1"></div>
-    <h2 class="rv rv-d2">Les marques que vous aimez,<br><em>à portée de main.</em></h2>
-    <p class="rv rv-d3">Ce qui paraissait lointain devient simple et proche. WenTouch crée le lien entre les boutiques européennes et vous.</p>
+    <p class="rv" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Déjà utilisé par des clients exigeants au Cameroun</p>
+    <h2 class="rv rv-d2">L'Europe,<br><em>sans le voyage.</em></h2>
+    <p class="rv rv-d3">Accédez à ce que les autres ne peuvent pas. WenTouch crée le lien entre les boutiques européennes et vous.</p>
   </div>
 </div>
 
@@ -546,33 +556,26 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 </div>
 
 <section id="process-section">
-  <p class="slbl rv">Comment ça marche</p>
+  <p class="slbl rv">Comment ça fonctionne</p>
   <h2 class="stitle rv">Trois étapes. <em>C'est tout.</em></h2>
-  <p class="ssub rv">Du lien produit à votre porte, nous coordonnons tout.</p>
 
   <div class="proc-grid rv">
     <div class="proc-step rv rv-d1">
       <div class="proc-num">1</div>
       <div class="proc-text">
-        <h3>Envoyez le lien</h3>
-        <p>Trouvez un produit sur n'importe quelle boutique européenne. Copiez le lien, envoyez-le nous.</p>
-        <a href="#" onclick="showSubpage('partagez-le-lien');return false">En savoir plus &rarr;</a>
+        <h3>Envoyez le lien du produit</h3>
       </div>
     </div>
     <div class="proc-step rv rv-d2">
       <div class="proc-num">2</div>
       <div class="proc-text">
-        <h3>Nous coordonnons</h3>
-        <p>Achat, vérification, paiement sécurisé. Vous recevez un devis transparent avant toute validation.</p>
-        <a href="#" onclick="showSubpage('recevez-votre-devis');return false">En savoir plus &rarr;</a>
+        <h3>Recevez votre devis complet</h3>
       </div>
     </div>
     <div class="proc-step rv rv-d3">
       <div class="proc-num">3</div>
       <div class="proc-text">
-        <h3>Vous recevez</h3>
-        <p>Livraison directe au Cameroun sous 7 à 14 jours. Suivi en temps réel jusqu'à votre porte.</p>
-        <a href="#" onclick="showSubpage('recevez-votre-colis');return false">En savoir plus &rarr;</a>
+        <h3>Recevez votre commande chez vous</h3>
       </div>
     </div>
   </div>
@@ -582,9 +585,9 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 
 <!-- CTA FINAL -->
 <div class="cta-ecrin rv">
-  <h2 class="rv rv-d1">Ce qui paraissait lointain<br>devient <em>simple.</em></h2>
-  <p class="rv rv-d2">Une demande suffit. Nous nous occupons du reste.</p>
-  <a class="btn-gold-glow rv rv-d3" href="https://order.wentouch.shop">Commencer une demande</a>
+  <h2 class="rv rv-d1">Faites votre première commande<br><em>dès aujourd'hui</em></h2>
+  <p class="rv rv-d2">Simple, rapide, sans déplacement.</p>
+  <a class="btn-gold-glow rv rv-d3" href="https://order.wentouch.shop">Envoyer un produit</a>
 </div>
 
 <footer>
@@ -602,6 +605,10 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   </div>
   <div class="fbottom"><p>Douala &amp; Yaoundé, Cameroun</p><p style="margin-top:6px">© 2026 Wentouch. Tous droits réservés.</p></div>
 </footer>
+
+<!-- STICKY BAR -->
+<div class="home-sticky" id="home-sticky">Livraison Europe → Cameroun en toute simplicité</div>
+
 </div>
 
 <!-- ═══════ CATEGORY PAGE ═══════ -->
@@ -1128,6 +1135,15 @@ document.querySelectorAll('.rv:not(.ok)').forEach(el=>{
     if(e.isIntersecting) e.target.classList.add('ok');
   },{threshold:.1}).observe(el);
 });
+
+/* HOME STICKY BAR — show after scrolling past hero */
+(function(){
+  var bar = document.getElementById('home-sticky');
+  if(!bar) return;
+  window.addEventListener('scroll', function(){
+    bar.classList.toggle('visible', window.scrollY > 600);
+  }, {passive:true});
+})();
 
 </script>
 
