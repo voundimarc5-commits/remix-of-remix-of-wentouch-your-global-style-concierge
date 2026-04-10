@@ -321,6 +321,11 @@ nav.scrolled .logo{font-size:22px}
 .btn-o{background:transparent;color:rgba(255,255,255,.6);border:none;padding:14px 8px;font-size:13px;font-family:var(--fb);cursor:pointer;text-decoration:none;transition:color .2s}
 .btn-o:hover{color:#fff}
 .hero-stats{display:none}
+.hero-cred{display:flex;align-items:center;gap:28px;justify-content:center;margin-top:20px;opacity:0;transform:translateY(10px);animation:credIn .7s ease-out .6s forwards}
+.hero-cred-count{font-size:15px;font-weight:500;letter-spacing:.04em;color:var(--gold-l)}
+.hero-cred-txt{font-size:12.5px;letter-spacing:.04em;color:rgba(255,255,255,.45)}
+@keyframes credIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:520px){.hero-cred{flex-direction:column;gap:6px}.hero-cred-txt{text-align:center;font-size:11.5px}}
 
 
 
@@ -526,7 +531,11 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <!-- INTEGRATED LOGO ANIMATION -->
   <div id="hero-logo-anim" class="hero-logo-anim">
     <span class="logo-w">W</span><span class="logo-en">en</span><span class="logo-touch">touch</span>
-  </div>
+    </div>
+    <div class="hero-cred">
+      <span class="hero-cred-count" id="heroCredCount">0 marques</span>
+      <span class="hero-cred-txt">Achat accompagné · Process maîtrisé · Livraison en toute confiance</span>
+    </div>
 
   <div class="hero-c">
     <p class="htag">Conciergerie Shopping Premium</p>
