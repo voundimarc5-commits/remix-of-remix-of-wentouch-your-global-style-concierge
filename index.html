@@ -328,6 +328,34 @@ nav.scrolled .logo{font-size:22px}
 @media(max-width:420px){.hero-cred{gap:10px}.hero-cred-count{font-size:12px}.hero-cred-txt{font-size:10px}}
 
 
+/* ── PROBLEM / SOLUTION ─────────────────────────────────── */
+.ps-section{padding:80px 24px;background:var(--beige-2)}
+.ps-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start}
+.ps-col{padding:0 24px}
+.ps-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.ps-label-gold{color:var(--gold)}
+.ps-heading{font-family:var(--fd);font-size:clamp(24px,4vw,32px);font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:32px}
+.ps-heading em{font-style:italic;color:var(--gold)}
+.ps-list{list-style:none;display:flex;flex-direction:column;gap:22px}
+.ps-list li{font-family:var(--fb);font-size:15px;color:var(--ink-2);display:flex;align-items:center;gap:12px;line-height:1.4}
+.ps-icon{font-size:13px;color:var(--ink-3);font-weight:600;flex-shrink:0;width:20px;text-align:center}
+.ps-check{font-size:14px;color:var(--gold);font-weight:600;flex-shrink:0;width:20px;text-align:center}
+.ps-list-gold li{color:var(--ink)}
+.ps-divider{display:flex;flex-direction:column;align-items:center;gap:0;padding-top:60px}
+.ps-divider-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+.ps-divider-arrow{font-family:var(--fd);font-size:20px;color:var(--gold);padding:10px 0;opacity:.7}
+/* animations */
+.ps-problems,.ps-solutions,.ps-divider{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.ps-problems.ok{opacity:1;transform:none}
+.ps-divider.ok{opacity:1;transform:none;transition-delay:.15s}
+.ps-solutions.ok{opacity:1;transform:none;transition-delay:.3s}
+@media(max-width:640px){
+  .ps-grid{grid-template-columns:1fr;gap:40px}
+  .ps-col{padding:0}
+  .ps-divider{flex-direction:row;padding-top:0}
+  .ps-divider-line{width:60px;height:1px}
+}
+
 
 /* ── INTEGRATED HERO LOGO ANIMATION ──────────────────────── */
 .hero-logo-anim{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;display:flex;align-items:baseline;white-space:nowrap}
@@ -556,6 +584,37 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   </div>
   <div class="scroll-hint">
     <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="ps-section">
+  <div class="ps-grid">
+    <div class="ps-col ps-problems" id="psProblems">
+      <p class="ps-label">Le problème</p>
+      <h3 class="ps-heading">Ce qui freine<br>votre achat</h3>
+      <ul class="ps-list">
+        <li><span class="ps-icon">✕</span> Peur de la contrefaçon</li>
+        <li><span class="ps-icon">✕</span> Délais imprévisibles</li>
+        <li><span class="ps-icon">✕</span> Trop d'intermédiaires</li>
+        <li><span class="ps-icon">✕</span> Paiement sans garantie</li>
+      </ul>
+    </div>
+    <div class="ps-divider" id="psDivider">
+      <div class="ps-divider-line"></div>
+      <div class="ps-divider-arrow">→</div>
+      <div class="ps-divider-line"></div>
+    </div>
+    <div class="ps-col ps-solutions" id="psSolutions">
+      <p class="ps-label ps-label-gold">La solution</p>
+      <h3 class="ps-heading">Ce que Wentouch<br><em>change</em></h3>
+      <ul class="ps-list ps-list-gold">
+        <li><span class="ps-check">✓</span> Produits authentifiés</li>
+        <li><span class="ps-check">✓</span> Délais maîtrisés</li>
+        <li><span class="ps-check">✓</span> Un seul interlocuteur</li>
+        <li><span class="ps-check">✓</span> Aucun paiement sans validation</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -1226,6 +1285,13 @@ function goBack(){
     }
   }, {passive:true});
 })();
+
+/* PS section reveal */
+document.querySelectorAll('#psProblems,#psDivider,#psSolutions').forEach(el=>{
+  new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){e.target.classList.add('ok');}
+  },{threshold:.15}).observe(el);
+});
 
 
 /* ═══════ INTEGRATED HERO ANIMATION ═══════ */
