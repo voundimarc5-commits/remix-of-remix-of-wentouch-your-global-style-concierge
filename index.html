@@ -675,6 +675,56 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <a class="btn-gold-glow rv rv-d3" href="https://order.wentouch.shop">Envoyer un produit</a>
 </div>
 
+<!-- QUI SOMMES-NOUS -->
+<style>
+.qsn-wrap{max-width:740px;margin:0 auto;padding:0 20px}
+.qsn-box{background:rgba(245,240,232,.35);border-radius:12px;padding:28px 24px;box-shadow:0 2px 20px rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.04)}
+.qsn-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;min-height:44px;-webkit-tap-highlight-color:transparent;user-select:none}
+.qsn-header h3{font-family:var(--ff);font-size:15px;font-weight:500;letter-spacing:.06em;color:var(--ink);margin:0}
+.qsn-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qsn-icon svg{transition:transform 250ms ease-out}
+.qsn-box.open .qsn-icon svg{transform:rotate(45deg)}
+.qsn-body{overflow:hidden;max-height:0;transition:max-height 320ms ease-out}
+.qsn-box.open .qsn-body{max-height:500px}
+.qsn-inner{opacity:0;transform:translateY(10px);transition:opacity 280ms ease-out 80ms,transform 280ms ease-out 80ms;padding:20px 0 4px}
+.qsn-box.open .qsn-inner{opacity:1;transform:translateY(0)}
+.qsn-inner p{font-size:14px;line-height:1.75;color:rgba(30,25,20,.7);margin:0 0 14px;max-width:620px}
+.qsn-inner p:last-child{margin-bottom:0}
+.qsn-inner p strong{color:var(--ink);font-weight:500}
+.qsn-inner p em{font-style:italic;color:var(--ink)}
+.qsn-sep{height:1px;background:rgba(0,0,0,.06);margin:48px auto 0;max-width:740px;padding:0 20px}
+@media(min-width:768px){
+  .qsn-box{padding:32px 36px}
+  .qsn-header h3{font-size:16px}
+  .qsn-inner p{font-size:14.5px}
+  .qsn-inner{padding:24px 0 8px}
+}
+</style>
+
+<section style="padding:56px 0 48px">
+  <div class="qsn-wrap">
+    <div class="qsn-box" id="qsn-box" onclick="this.classList.toggle('open')">
+      <div class="qsn-header">
+        <h3>Qui sommes-nous ?</h3>
+        <div class="qsn-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/>
+          </svg>
+        </div>
+      </div>
+      <div class="qsn-body">
+        <div class="qsn-inner">
+          <p>Wentouch est une conciergerie shopping qui vous permet d'accéder simplement aux meilleures marques européennes, depuis l'étranger.</p>
+          <p>Nous sommes partis d'une idée claire : acheter à distance ne devrait ni être complexe, ni incertain. C'est pourquoi chaque commande est accompagnée avec rigueur, de la sélection des articles jusqu'à leur livraison.</p>
+          <p>Nous vérifions les informations, coordonnons les achats et assurons le suivi logistique afin de vous offrir une expérience fluide, fiable et maîtrisée à chaque étape.</p>
+          <p><strong>Un service pensé pour vous faire gagner du temps, tout en maintenant un haut niveau d'exigence.</strong></p>
+          <p><em>Vous choisissez. Nous nous occupons du reste.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <span class="flogo">Wen<span>touch</span></span>
   <p>Votre conciergerie d'achat international premium.<br>Les meilleures marques européennes livrées au Cameroun.</p>
