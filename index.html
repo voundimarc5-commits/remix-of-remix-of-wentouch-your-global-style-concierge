@@ -673,92 +673,50 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <h2 class="rv rv-d1">Faites votre première commande<br><em>dès aujourd'hui</em></h2>
   <p class="rv rv-d2">Simple, rapide, sans déplacement.</p>
   <a class="btn-gold-glow rv rv-d3" href="https://order.wentouch.shop">Envoyer un produit</a>
-</div>
 
-<!-- QUI SOMMES-NOUS -->
-<style>
-@keyframes qsnReveal{
-  from{opacity:0;transform:translateY(24px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.qsn-section{padding:64px 0 56px;opacity:0;transform:translateY(24px)}
-.qsn-section.qsn-visible{animation:qsnReveal .6s ease-out forwards}
-.qsn-wrap{max-width:720px;margin:0 auto;padding:0 20px}
-.qsn-box{background:linear-gradient(135deg,rgba(245,240,232,.4),rgba(250,247,242,.25));border-radius:14px;padding:28px 24px;box-shadow:0 4px 32px rgba(0,0,0,.025),0 1px 3px rgba(0,0,0,.02);border:1px solid rgba(200,185,165,.12);backdrop-filter:blur(8px);transition:box-shadow .3s ease,border-color .3s ease}
-.qsn-box:hover{box-shadow:0 6px 40px rgba(0,0,0,.04);border-color:rgba(200,185,165,.2)}
-.qsn-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;user-select:none;gap:16px}
-.qsn-label{display:flex;flex-direction:column;gap:4px}
-.qsn-header h3{font-family:var(--fd);font-size:clamp(24px,4vw,32px);font-weight:400;letter-spacing:.02em;color:var(--ink);margin:0}
-.qsn-subtitle{font-size:12px;color:rgba(30,25,20,.4);letter-spacing:.04em;font-weight:400;transition:opacity .3s ease}
-.qsn-box.open .qsn-subtitle{opacity:0}
-.qsn-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:50%;border:1px solid rgba(200,185,165,.2);transition:background .25s ease,border-color .25s ease}
-.qsn-box:hover .qsn-icon{border-color:rgba(200,185,165,.35)}
-.qsn-box.open .qsn-icon{background:rgba(200,185,165,.1)}
-.qsn-icon svg{transition:transform 250ms ease-out;color:rgba(30,25,20,.5)}
-.qsn-box.open .qsn-icon svg{transform:rotate(45deg);color:var(--ink)}
-.qsn-body{overflow:hidden;max-height:0;transition:max-height 320ms ease-out}
-.qsn-box.open .qsn-body{max-height:600px}
-.qsn-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,185,165,.25),transparent);margin:16px 0 0;opacity:0;transition:opacity .25s ease .1s}
-.qsn-box.open .qsn-divider{opacity:1}
-.qsn-inner{opacity:0;transform:translateY(12px);transition:opacity 300ms ease-out 100ms,transform 300ms ease-out 100ms;padding:24px 0 4px}
-.qsn-box.open .qsn-inner{opacity:1;transform:translateY(0)}
-.qsn-inner p{font-size:14px;line-height:1.8;color:rgba(30,25,20,.6);margin:0 0 16px;max-width:600px}
-.qsn-inner p:last-child{margin-bottom:0}
-.qsn-inner p strong{color:var(--ink);font-weight:500}
-.qsn-inner p em{font-style:italic;color:rgba(30,25,20,.75);font-size:14.5px}
-.qsn-signature{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(200,185,165,.12)}
-.qsn-signature span{font-family:var(--ff);font-size:13px;font-weight:500;color:var(--ink);letter-spacing:.03em}
-.qsn-signature small{font-size:11px;color:rgba(30,25,20,.35)}
-@media(min-width:768px){
-  .qsn-section{padding:80px 0 64px}
-  .qsn-box{padding:36px 40px}
-  .qsn-header h3{font-size:18px}
-  .qsn-inner p{font-size:14.5px}
-  .qsn-inner{padding:28px 0 8px}
-}
-</style>
-
-<section class="qsn-section" id="qsn-section">
-  <div class="qsn-wrap">
-    <div class="qsn-box" id="qsn-box" onclick="this.classList.toggle('open')">
-      <div class="qsn-header">
-        <div class="qsn-label">
-          <h3>Qui sommes-nous ?</h3>
-          <span class="qsn-subtitle">En savoir plus sur Wentouch</span>
-        </div>
-        <div class="qsn-icon">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-            <line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/>
-          </svg>
-        </div>
-      </div>
-      <div class="qsn-body">
-        <div class="qsn-divider"></div>
-        <div class="qsn-inner">
-          <p>Wentouch est une conciergerie shopping qui vous permet d'accéder simplement aux meilleures marques européennes, depuis l'étranger.</p>
-          <p>Nous sommes partis d'une idée claire : acheter à distance ne devrait ni être complexe, ni incertain. C'est pourquoi chaque commande est accompagnée avec rigueur, de la sélection des articles jusqu'à leur livraison.</p>
-          <p>Nous vérifions les informations, coordonnons les achats et assurons le suivi logistique afin de vous offrir une expérience fluide, fiable et maîtrisée à chaque étape.</p>
-          <p><strong>Un service pensé pour vous faire gagner du temps, tout en maintenant un haut niveau d'exigence.</strong></p>
-          <p><em>Vous choisissez. Nous nous occupons du reste.</em></p>
-          <div class="qsn-signature">
-            <span>— L'équipe Wentouch</span>
-            <small>Douala · Yaoundé</small>
-          </div>
-        </div>
+  <div class="qsn-inline" id="qsn-box" style="margin-top:32px;max-width:600px;text-align:left">
+    <div class="qsn-trigger" onclick="document.getElementById('qsn-box').classList.toggle('open')">
+      <span class="qsn-title">Notre approche</span>
+      <span class="qsn-plus">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/>
+        </svg>
+      </span>
+    </div>
+    <div class="qsn-expand">
+      <div class="qsn-content">
+        <p>Wentouch est une conciergerie shopping qui vous permet d'accéder simplement aux meilleures marques européennes, depuis l'étranger.</p>
+        <p>Nous sommes partis d'une idée claire : acheter à distance ne devrait ni être complexe, ni incertain. C'est pourquoi chaque commande est accompagnée avec rigueur, de la sélection des articles jusqu'à leur livraison.</p>
+        <p>Nous vérifions les informations, coordonnons les achats et assurons le suivi logistique afin de vous offrir une expérience fluide, fiable et maîtrisée à chaque étape.</p>
+        <p><strong>Un service pensé pour vous faire gagner du temps, tout en maintenant un haut niveau d'exigence.</strong></p>
+        <p><em>Vous choisissez. Nous nous occupons du reste.</em></p>
+        <div class="qsn-sig">— L'équipe Wentouch <small>Douala · Yaoundé</small></div>
       </div>
     </div>
   </div>
-</section>
-<script>
-(function(){
-  var s=document.getElementById('qsn-section');
-  if(!s)return;
-  var o=new IntersectionObserver(function(e){
-    if(e[0].isIntersecting){s.classList.add('qsn-visible');o.disconnect()}
-  },{threshold:.15});
-  o.observe(s);
-})();
-</script>
+</div>
+
+<style>
+.qsn-inline{position:relative}
+.qsn-trigger{display:flex;align-items:center;gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;padding:8px 0}
+.qsn-title{font-family:var(--fd);font-size:clamp(16px,3vw,20px);font-weight:400;letter-spacing:.03em;color:rgba(255,255,255,.5);transition:color .25s ease}
+.qsn-inline:hover .qsn-title,.qsn-inline.open .qsn-title{color:rgba(255,255,255,.75)}
+.qsn-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0}
+.qsn-plus svg{transition:transform 250ms ease-out;color:rgba(255,255,255,.35)}
+.qsn-inline.open .qsn-plus svg{transform:rotate(45deg);color:rgba(255,255,255,.6)}
+.qsn-expand{overflow:hidden;max-height:0;opacity:0;transition:max-height 380ms ease-out,opacity 350ms ease-out}
+.qsn-inline.open .qsn-expand{max-height:600px;opacity:1}
+.qsn-content{padding:20px 0 8px;transform:translateY(15px);transition:transform 380ms ease-out}
+.qsn-inline.open .qsn-content{transform:translateY(0)}
+.qsn-content p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.45);margin:0 0 16px;max-width:600px}
+.qsn-content p:last-of-type{margin-bottom:0}
+.qsn-content p strong{color:rgba(255,255,255,.65);font-weight:500}
+.qsn-content p em{font-style:italic;color:rgba(255,255,255,.55)}
+.qsn-sig{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--fd);font-size:14px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:10px}
+.qsn-sig small{font-size:11px;color:rgba(255,255,255,.2);font-family:var(--fb)}
+</style>
+
+
 
 <footer>
   <span class="flogo">Wen<span>touch</span></span>
