@@ -677,53 +677,88 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 
 <!-- QUI SOMMES-NOUS -->
 <style>
-.qsn-wrap{max-width:740px;margin:0 auto;padding:0 20px}
-.qsn-box{background:rgba(245,240,232,.35);border-radius:12px;padding:28px 24px;box-shadow:0 2px 20px rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.04)}
-.qsn-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;min-height:44px;-webkit-tap-highlight-color:transparent;user-select:none}
-.qsn-header h3{font-family:var(--ff);font-size:15px;font-weight:500;letter-spacing:.06em;color:var(--ink);margin:0}
-.qsn-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.qsn-icon svg{transition:transform 250ms ease-out}
-.qsn-box.open .qsn-icon svg{transform:rotate(45deg)}
+@keyframes qsnReveal{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.qsn-section{padding:64px 0 56px;opacity:0;transform:translateY(24px)}
+.qsn-section.qsn-visible{animation:qsnReveal .6s ease-out forwards}
+.qsn-wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.qsn-box{background:linear-gradient(135deg,rgba(245,240,232,.4),rgba(250,247,242,.25));border-radius:14px;padding:28px 24px;box-shadow:0 4px 32px rgba(0,0,0,.025),0 1px 3px rgba(0,0,0,.02);border:1px solid rgba(200,185,165,.12);backdrop-filter:blur(8px);transition:box-shadow .3s ease,border-color .3s ease}
+.qsn-box:hover{box-shadow:0 6px 40px rgba(0,0,0,.04);border-color:rgba(200,185,165,.2)}
+.qsn-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;user-select:none;gap:16px}
+.qsn-label{display:flex;flex-direction:column;gap:4px}
+.qsn-header h3{font-family:var(--ff);font-size:17px;font-weight:500;letter-spacing:.05em;color:var(--ink);margin:0}
+.qsn-subtitle{font-size:12px;color:rgba(30,25,20,.4);letter-spacing:.04em;font-weight:400;transition:opacity .3s ease}
+.qsn-box.open .qsn-subtitle{opacity:0}
+.qsn-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:50%;border:1px solid rgba(200,185,165,.2);transition:background .25s ease,border-color .25s ease}
+.qsn-box:hover .qsn-icon{border-color:rgba(200,185,165,.35)}
+.qsn-box.open .qsn-icon{background:rgba(200,185,165,.1)}
+.qsn-icon svg{transition:transform 250ms ease-out;color:rgba(30,25,20,.5)}
+.qsn-box.open .qsn-icon svg{transform:rotate(45deg);color:var(--ink)}
 .qsn-body{overflow:hidden;max-height:0;transition:max-height 320ms ease-out}
-.qsn-box.open .qsn-body{max-height:500px}
-.qsn-inner{opacity:0;transform:translateY(10px);transition:opacity 280ms ease-out 80ms,transform 280ms ease-out 80ms;padding:20px 0 4px}
+.qsn-box.open .qsn-body{max-height:600px}
+.qsn-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(200,185,165,.25),transparent);margin:16px 0 0;opacity:0;transition:opacity .25s ease .1s}
+.qsn-box.open .qsn-divider{opacity:1}
+.qsn-inner{opacity:0;transform:translateY(12px);transition:opacity 300ms ease-out 100ms,transform 300ms ease-out 100ms;padding:24px 0 4px}
 .qsn-box.open .qsn-inner{opacity:1;transform:translateY(0)}
-.qsn-inner p{font-size:14px;line-height:1.75;color:rgba(30,25,20,.7);margin:0 0 14px;max-width:620px}
+.qsn-inner p{font-size:14px;line-height:1.8;color:rgba(30,25,20,.6);margin:0 0 16px;max-width:600px}
 .qsn-inner p:last-child{margin-bottom:0}
 .qsn-inner p strong{color:var(--ink);font-weight:500}
-.qsn-inner p em{font-style:italic;color:var(--ink)}
-.qsn-sep{height:1px;background:rgba(0,0,0,.06);margin:48px auto 0;max-width:740px;padding:0 20px}
+.qsn-inner p em{font-style:italic;color:rgba(30,25,20,.75);font-size:14.5px}
+.qsn-signature{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(200,185,165,.12)}
+.qsn-signature span{font-family:var(--ff);font-size:13px;font-weight:500;color:var(--ink);letter-spacing:.03em}
+.qsn-signature small{font-size:11px;color:rgba(30,25,20,.35)}
 @media(min-width:768px){
-  .qsn-box{padding:32px 36px}
-  .qsn-header h3{font-size:16px}
+  .qsn-section{padding:80px 0 64px}
+  .qsn-box{padding:36px 40px}
+  .qsn-header h3{font-size:18px}
   .qsn-inner p{font-size:14.5px}
-  .qsn-inner{padding:24px 0 8px}
+  .qsn-inner{padding:28px 0 8px}
 }
 </style>
 
-<section style="padding:56px 0 48px">
+<section class="qsn-section" id="qsn-section">
   <div class="qsn-wrap">
     <div class="qsn-box" id="qsn-box" onclick="this.classList.toggle('open')">
       <div class="qsn-header">
-        <h3>Qui sommes-nous ?</h3>
+        <div class="qsn-label">
+          <h3>Qui sommes-nous ?</h3>
+          <span class="qsn-subtitle">En savoir plus sur Wentouch</span>
+        </div>
         <div class="qsn-icon">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+            <line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/>
           </svg>
         </div>
       </div>
       <div class="qsn-body">
+        <div class="qsn-divider"></div>
         <div class="qsn-inner">
           <p>Wentouch est une conciergerie shopping qui vous permet d'accéder simplement aux meilleures marques européennes, depuis l'étranger.</p>
           <p>Nous sommes partis d'une idée claire : acheter à distance ne devrait ni être complexe, ni incertain. C'est pourquoi chaque commande est accompagnée avec rigueur, de la sélection des articles jusqu'à leur livraison.</p>
           <p>Nous vérifions les informations, coordonnons les achats et assurons le suivi logistique afin de vous offrir une expérience fluide, fiable et maîtrisée à chaque étape.</p>
           <p><strong>Un service pensé pour vous faire gagner du temps, tout en maintenant un haut niveau d'exigence.</strong></p>
           <p><em>Vous choisissez. Nous nous occupons du reste.</em></p>
+          <div class="qsn-signature">
+            <span>— L'équipe Wentouch</span>
+            <small>Douala · Yaoundé</small>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+(function(){
+  var s=document.getElementById('qsn-section');
+  if(!s)return;
+  var o=new IntersectionObserver(function(e){
+    if(e[0].isIntersecting){s.classList.add('qsn-visible');o.disconnect()}
+  },{threshold:.15});
+  o.observe(s);
+})();
+</script>
 
 <footer>
   <span class="flogo">Wen<span>touch</span></span>
