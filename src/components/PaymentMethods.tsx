@@ -29,46 +29,40 @@ const paymentMethods = [
 
 const PaymentMethods = () => {
   return (
-    <section className="py-16 md:py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-sm uppercase tracking-[0.2em] text-primary font-medium mb-4">
+    <section className="py-24 md:py-32 bg-background">
+      <div className="max-w-[1300px] mx-auto px-6 md:px-12">
+        <div className="max-w-xl mb-16">
+          <p className="text-xs uppercase tracking-[0.25em] text-primary font-medium mb-5">
             Paiements sécurisés
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-medium mb-4 text-foreground">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-4 text-foreground text-left leading-[1.1]">
             Modes de <span className="text-gradient-gold">paiement</span>
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-base leading-relaxed max-w-[480px]">
             Paiements sécurisés et vérifiés avant chaque achat
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8 max-w-[1100px]">
           {paymentMethods.map((method) => {
-            const content = (
-              <div className="flex items-center gap-3 bg-card rounded-xl px-5 py-4 shadow-luxury border border-border hover:shadow-luxury-hover hover:border-primary/30 transition-all duration-300">
-                <div className="w-10 h-10 rounded-lg bg-gradient-gold flex items-center justify-center">
+            const inner = (
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-lg bg-gradient-gold flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <method.icon className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="font-medium text-foreground text-sm">{method.name}</p>
-                  <p className="text-xs text-muted-foreground">{method.description}</p>
+                  <p className="font-display text-lg font-medium text-foreground">{method.name}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{method.description}</p>
                 </div>
               </div>
             );
 
             return method.link ? (
-              <a
-                key={method.name}
-                href={method.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer"
-              >
-                {content}
+              <a key={method.name} href={method.link} target="_blank" rel="noopener noreferrer">
+                {inner}
               </a>
             ) : (
-              <div key={method.name}>{content}</div>
+              <div key={method.name}>{inner}</div>
             );
           })}
         </div>
