@@ -321,11 +321,11 @@ nav.scrolled .logo{font-size:22px}
 .btn-o{background:transparent;color:rgba(255,255,255,.6);border:none;padding:14px 8px;font-size:13px;font-family:var(--fb);cursor:pointer;text-decoration:none;transition:color .2s}
 .btn-o:hover{color:#fff}
 .hero-stats{display:none}
-.hero-cred{display:flex;align-items:center;gap:28px;justify-content:center;margin-top:20px;opacity:0;transform:translateY(10px);animation:credIn .7s ease-out .6s forwards}
-.hero-cred-count{font-size:15px;font-weight:500;letter-spacing:.04em;color:var(--gold-l)}
-.hero-cred-txt{font-size:12.5px;letter-spacing:.04em;color:rgba(255,255,255,.45)}
+.hero-cred{display:flex;align-items:baseline;gap:20px;justify-content:center;margin-top:16px;opacity:0;transform:translateY(10px);animation:credIn .7s ease-out .6s forwards;font-family:var(--fd)}
+.hero-cred-count{font-size:13px;font-weight:400;font-style:italic;letter-spacing:.03em;color:var(--gold-l);white-space:nowrap}
+.hero-cred-txt{font-size:11px;font-style:italic;letter-spacing:.03em;color:rgba(255,255,255,.45);white-space:nowrap}
 @keyframes credIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:520px){.hero-cred{flex-direction:column;gap:6px}.hero-cred-txt{text-align:center;font-size:11.5px}}
+@media(max-width:420px){.hero-cred{gap:10px}.hero-cred-count{font-size:12px}.hero-cred-txt{font-size:10px}}
 
 
 
@@ -794,16 +794,30 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
 (function(){
   var el=document.getElementById('heroCredCount');
   if(!el)return;
-  var target=100,duration=1400,start=null;
+  var target=100,duration=1400,start=null,done=false;
   function tick(now){
     if(!start)start=now;
     var p=Math.min((now-start)/duration,1);
     var e=1-Math.pow(1-p,3);
     var v=Math.round(e*target);
     el.textContent=(p>=1?'+':'')+v+' marques';
-    if(p<1)requestAnimationFrame(tick);
+    if(p<1){requestAnimationFrame(tick);}
   }
-  setTimeout(function(){requestAnimationFrame(tick);},600);
+  // Wait for hero content to be visible before starting
+  var heroC=document.querySelector('.hero-c');
+  if(heroC){
+    var obs=new MutationObserver(function(){
+      if(heroC.classList.contains('visible')||getComputedStyle(heroC).opacity!=='0'){
+        obs.disconnect();
+        setTimeout(function(){requestAnimationFrame(tick);},600);
+      }
+    });
+    obs.observe(heroC,{attributes:true,attributeFilter:['class','style']});
+    // Fallback: start after 4s anyway
+    setTimeout(function(){obs.disconnect();requestAnimationFrame(tick);},4000);
+  } else {
+    setTimeout(function(){requestAnimationFrame(tick);},600);
+  }
 })();
 </script>
 <script>
