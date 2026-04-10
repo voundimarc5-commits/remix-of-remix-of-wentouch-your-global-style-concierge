@@ -1119,11 +1119,7 @@ function showSubpage(slug){
 function goBack(){
   document.querySelectorAll('.page,.subpage').forEach(p=>p.classList.remove('active'));
   document.getElementById('home').classList.add('active');
-  // Scroll to process section smoothly
-  setTimeout(()=>{
-    const el = document.getElementById('process-section');
-    if(el) el.scrollIntoView({behavior:'smooth'});
-  },80);
+  window.scrollTo(0,0);
 }
 
 /* CATEGORY HERO PARALLAX — subtle image movement on scroll in category pages */
