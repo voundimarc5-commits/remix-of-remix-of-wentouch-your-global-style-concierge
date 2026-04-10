@@ -673,7 +673,48 @@ footer p{font-size:13px;line-height:1.7;margin-bottom:24px;max-width:300px}
   <h2 class="rv rv-d1">Faites votre première commande<br><em>dès aujourd'hui</em></h2>
   <p class="rv rv-d2">Simple, rapide, sans déplacement.</p>
   <a class="btn-gold-glow rv rv-d3" href="https://order.wentouch.shop">Envoyer un produit</a>
+
+  <div class="qsn-inline" id="qsn-box" style="margin-top:32px;max-width:600px;text-align:left">
+    <div class="qsn-trigger" onclick="document.getElementById('qsn-box').classList.toggle('open')">
+      <span class="qsn-title">Notre approche</span>
+      <span class="qsn-plus">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/>
+        </svg>
+      </span>
+    </div>
+    <div class="qsn-expand">
+      <div class="qsn-content">
+        <p>Wentouch est une conciergerie shopping qui vous permet d'accéder simplement aux meilleures marques européennes, depuis l'étranger.</p>
+        <p>Nous sommes partis d'une idée claire : acheter à distance ne devrait ni être complexe, ni incertain. C'est pourquoi chaque commande est accompagnée avec rigueur, de la sélection des articles jusqu'à leur livraison.</p>
+        <p>Nous vérifions les informations, coordonnons les achats et assurons le suivi logistique afin de vous offrir une expérience fluide, fiable et maîtrisée à chaque étape.</p>
+        <p><strong>Un service pensé pour vous faire gagner du temps, tout en maintenant un haut niveau d'exigence.</strong></p>
+        <p><em>Vous choisissez. Nous nous occupons du reste.</em></p>
+        <div class="qsn-sig">— L'équipe Wentouch <small>Douala · Yaoundé</small></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<style>
+.qsn-inline{position:relative}
+.qsn-trigger{display:flex;align-items:center;gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;padding:8px 0}
+.qsn-title{font-family:var(--fd);font-size:clamp(16px,3vw,20px);font-weight:400;letter-spacing:.03em;color:rgba(255,255,255,.5);transition:color .25s ease}
+.qsn-inline:hover .qsn-title,.qsn-inline.open .qsn-title{color:rgba(255,255,255,.75)}
+.qsn-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0}
+.qsn-plus svg{transition:transform 250ms ease-out;color:rgba(255,255,255,.35)}
+.qsn-inline.open .qsn-plus svg{transform:rotate(45deg);color:rgba(255,255,255,.6)}
+.qsn-expand{overflow:hidden;max-height:0;opacity:0;transition:max-height 380ms ease-out,opacity 350ms ease-out}
+.qsn-inline.open .qsn-expand{max-height:600px;opacity:1}
+.qsn-content{padding:20px 0 8px;transform:translateY(15px);transition:transform 380ms ease-out}
+.qsn-inline.open .qsn-content{transform:translateY(0)}
+.qsn-content p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.45);margin:0 0 16px;max-width:600px}
+.qsn-content p:last-of-type{margin-bottom:0}
+.qsn-content p strong{color:rgba(255,255,255,.65);font-weight:500}
+.qsn-content p em{font-style:italic;color:rgba(255,255,255,.55)}
+.qsn-sig{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--fd);font-size:14px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:10px}
+.qsn-sig small{font-size:11px;color:rgba(255,255,255,.2);font-family:var(--fb)}
+</style>
 
 <!-- QUI SOMMES-NOUS -->
 <style>
