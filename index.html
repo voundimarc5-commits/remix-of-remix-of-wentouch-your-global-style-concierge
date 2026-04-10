@@ -334,12 +334,12 @@ nav.scrolled .logo{font-size:22px}
 .ps-col{padding:0 24px}
 .ps-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
 .ps-label-gold{color:var(--gold)}
-.ps-heading{font-family:var(--fd);font-size:clamp(24px,4vw,32px);font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:32px}
+.ps-heading{font-family:var(--fd);font-size:clamp(20px,4vw,32px);font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:24px}
 .ps-heading em{font-style:italic;color:var(--gold)}
-.ps-list{list-style:none;display:flex;flex-direction:column;gap:22px}
-.ps-list li{font-family:var(--fb);font-size:15px;color:var(--ink-2);display:flex;align-items:center;gap:12px;line-height:1.4}
-.ps-icon{font-size:13px;color:var(--ink-3);font-weight:600;flex-shrink:0;width:20px;text-align:center}
-.ps-check{font-size:14px;color:var(--gold);font-weight:600;flex-shrink:0;width:20px;text-align:center}
+.ps-list{list-style:none;display:flex;flex-direction:column;gap:18px}
+.ps-list li{font-family:var(--fb);font-size:15px;color:var(--ink-2);display:flex;align-items:center;gap:10px;line-height:1.4}
+.ps-icon{font-size:13px;color:var(--ink-3);font-weight:600;flex-shrink:0;width:16px;text-align:center}
+.ps-check{font-size:14px;color:var(--gold);font-weight:600;flex-shrink:0;width:16px;text-align:center}
 .ps-list-gold li{color:var(--ink)}
 .ps-divider{display:flex;flex-direction:column;align-items:center;gap:0;padding-top:60px}
 .ps-divider-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
@@ -350,12 +350,16 @@ nav.scrolled .logo{font-size:22px}
 .ps-divider.ok{opacity:1;transform:none;transition-delay:.15s}
 .ps-solutions.ok{opacity:1;transform:none;transition-delay:.3s}
 @media(max-width:640px){
-  .ps-grid{grid-template-columns:1fr;gap:40px}
-  .ps-col{padding:0}
-  .ps-divider{flex-direction:row;padding-top:0}
-  .ps-divider-line{width:60px;height:1px}
+  .ps-section{padding:48px 16px}
+  .ps-col{padding:0 8px}
+  .ps-heading{font-size:18px;margin-bottom:18px}
+  .ps-list li{font-size:12.5px;gap:6px}
+  .ps-list{gap:14px}
+  .ps-icon,.ps-check{width:14px;font-size:11px}
+  .ps-divider-line{height:40px}
+  .ps-divider-arrow{font-size:16px;padding:6px 0}
+  .ps-divider{padding-top:40px}
 }
-
 
 /* ── INTEGRATED HERO LOGO ANIMATION ──────────────────────── */
 .hero-logo-anim{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;pointer-events:none;display:flex;align-items:baseline;white-space:nowrap}
