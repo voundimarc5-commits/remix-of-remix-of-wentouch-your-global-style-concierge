@@ -1362,7 +1362,11 @@ document.querySelectorAll('.rv:not(.ok),.rv-left:not(.ok),.rv-right:not(.ok),.rv
 
 <style>
 /* ── GV3 CLEAN — Partager le lien ──────────────────────────── */
-.gv3{max-width:420px;margin:0 auto;padding:0 20px 72px}
+.gv3{max-width:800px;margin:0 auto;padding:0 20px 72px}
+@media(min-width:1024px){.gv3{max-width:960px;padding:0 40px 100px}}
+@media(min-width:1440px){.gv3{max-width:1100px;padding:0 48px 120px}}
+.gv3-pair{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:768px){.gv3-pair{grid-template-columns:1fr 1fr;gap:16px}}
 .gv3-flow{display:flex;align-items:center;gap:8px;margin-bottom:44px;flex-wrap:wrap}
 .gv3-flow-dot{width:8px;height:8px;border-radius:50%;background:var(--beige-3);transition:background .4s}
 .gv3-flow-dot.active{background:var(--gold);box-shadow:0 0 0 3px rgba(184,148,44,.15)}
