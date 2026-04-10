@@ -1286,6 +1286,13 @@ function goBack(){
   }, {passive:true});
 })();
 
+/* PS section reveal */
+document.querySelectorAll('#psProblems,#psDivider,#psSolutions').forEach(el=>{
+  new IntersectionObserver(([e])=>{
+    if(e.isIntersecting){e.target.classList.add('ok');}
+  },{threshold:.15}).observe(el);
+});
+
 
 /* ═══════ INTEGRATED HERO ANIMATION ═══════ */
 (function(){
