@@ -17,8 +17,12 @@
   --fd:'Cormorant Garamond',Georgia,serif;
   --fb:'DM Sans',system-ui,sans-serif;
 }
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden}
+ body{font-family:var(--fb);background:var(--beige);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+ *,*::before,*::after{box-sizing:border-box}
+ img,video,iframe{max-width:100%}
+ input,textarea,select{max-width:100%}
+ pre,code{white-space:pre-wrap;word-break:break-word}
 nav{position:sticky;top:0;z-index:100;background:rgba(245,240,235,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(184,148,44,.12);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
 .logo{font-family:var(--fd);font-size:22px;font-weight:600;color:var(--ink);text-decoration:none}
 .logo span{color:var(--gold)}
