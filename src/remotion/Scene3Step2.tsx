@@ -179,12 +179,12 @@ const WentouchScreen: React.FC<{ frame: number }> = ({ frame }) => {
   });
 
   // ── Phase 2: form appears ────────────────────────────────────
-  const step2Opacity = interpolate(frame, F.step2In[0], F.step2In[1], {
+  const step2Opacity = interpolate(frame, F.step2In, [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
-  const step2Y = interpolate(frame, F.step2In[0], F.step2In[1], {
+  const step2Y = interpolate(frame, F.step2In, [12, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
