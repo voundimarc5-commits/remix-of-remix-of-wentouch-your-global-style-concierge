@@ -209,8 +209,8 @@ const WentouchScreen: React.FC<{ frame: number }> = ({ frame }) => {
   });
   const btnPulseScale = interpolate(
     frame,
-    [F.btnPulse[0] + 8, F.btnPulse[0] + 14, F.btnPulse[1]],
-    [1, 1.03, 1],
+    [F.btnPulse[0] + 4, F.btnPulse[0] + 9],
+    [1, 1.03],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sine) }
   );
 
