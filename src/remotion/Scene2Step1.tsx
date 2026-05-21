@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCurrentFrame, interpolate, Easing, Img, staticFile } from "remotion";
 import { THEME, FONTS } from "./theme";
 import { IPhoneMockup } from "./IPhoneMockup";
+
+// Uses real photo if available, falls back to styled placeholder
+const ProductImage: React.FC = () => {
+  const [failed, setFailed] = useState(false);
+  return (
+    <div style={{ width: "100%", height: 220, backgroundColor: "#F0EDEA", overflow: "hidden", flexShrink: 0, position: "relative" }}>
+      {!failed ? (
+        <img
+          src="/zara-dress.jpg"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6 }}>
+          <svg width="72" height="145" viewBox="0 0 72 145" fill="none">
+            <ellipse cx="36" cy="12" rx="9" ry="11" fill="#C4A882" />
+            <path d="M25 26 C22 30 17 38 15 48 L12 88 L60 88 L57 48 C55 38 50 30 47 26 L36 32 Z" fill="#4A3D30" />
+            <path d="M12 88 C10 104 9 118 11 135 L61 135 C63 118 62 104 60 88 Z" fill="#3D3228" />
+            <path d="M20 88 C23 100 22 114 20 128" stroke="#5A4535" strokeWidth="1.2" fill="none" opacity="0.5" />
+            <path d="M52 88 C49 100 50 114 52 128" stroke="#5A4535" strokeWidth="1.2" fill="none" opacity="0.5" />
+            <path d="M25 28 L14 52" stroke="#C4A882" strokeWidth="6" strokeLinecap="round" />
+            <path d="M47 28 L58 52" stroke="#C4A882" strokeWidth="6" strokeLinecap="round" />
+            <rect x="27" y="135" width="7" height="9" rx="3.5" fill="#C4A882" />
+            <rect x="38" y="135" width="7" height="9" rx="3.5" fill="#C4A882" />
+          </svg>
+          <span style={{ fontSize: 8, color: "#AAA", fontFamily: "'DM Sans', sans-serif", letterSpacing: "2px" }}>ZARA</span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ZaraScreen: React.FC<{ frame: number }> = ({ frame }) => {
   // Cursor moves to URL bar (frames 40-70), selects URL (70-100), copy toast (100-140)
@@ -99,27 +130,8 @@ const ZaraScreen: React.FC<{ frame: number }> = ({ frame }) => {
 
       {/* Product page */}
       <div style={{ flex: 1, overflowY: "hidden", display: "flex", flexDirection: "column" }}>
-        {/* Product image — real photo */}
-        <div
-          style={{
-            width: "100%",
-            height: 220,
-            backgroundColor: "#F0EDEA",
-            overflow: "hidden",
-            flexShrink: 0,
-            position: "relative",
-          }}
-        >
-          <Img
-            src={staticFile("/zara-dress.jpg")}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-            }}
-          />
-        </div>
+        {/* Product image */}
+        <ProductImage />
 
         {/* Product info */}
         <div style={{ padding: "12px 14px", display: "flex", flexDirection: "column", gap: 8 }}>
