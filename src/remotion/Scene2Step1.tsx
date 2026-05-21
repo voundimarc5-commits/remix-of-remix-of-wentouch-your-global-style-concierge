@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentFrame, interpolate, Easing } from "remotion";
+import { useCurrentFrame, interpolate, Easing, Img, staticFile } from "remotion";
 import { THEME, FONTS } from "./theme";
 import { IPhoneMockup } from "./IPhoneMockup";
 
@@ -99,54 +99,26 @@ const ZaraScreen: React.FC<{ frame: number }> = ({ frame }) => {
 
       {/* Product page */}
       <div style={{ flex: 1, overflowY: "hidden", display: "flex", flexDirection: "column" }}>
-        {/* Product image */}
+        {/* Product image — real photo */}
         <div
           style={{
             width: "100%",
             height: 220,
             backgroundColor: "#F0EDEA",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            overflow: "hidden",
             flexShrink: 0,
+            position: "relative",
           }}
         >
-          {/* Stylized dress silhouette */}
-          <svg width="80" height="160" viewBox="0 0 80 160" fill="none">
-            {/* Head */}
-            <ellipse cx="40" cy="14" rx="10" ry="12" fill="#C4A882" />
-            {/* Body / dress */}
-            <path
-              d="M28 30 C28 30 20 34 18 42 L14 80 L66 80 L62 42 C60 34 52 30 52 30 L40 36 Z"
-              fill="#4A3D30"
-            />
-            {/* Skirt draped */}
-            <path
-              d="M14 80 C12 95 10 115 12 135 L68 135 C70 115 68 95 66 80 Z"
-              fill="#3D3228"
-            />
-            {/* Draped detail */}
-            <path
-              d="M22 80 C25 90 28 100 26 115"
-              stroke="#5A4535"
-              strokeWidth="1.5"
-              fill="none"
-              opacity="0.6"
-            />
-            <path
-              d="M58 80 C55 90 52 100 54 115"
-              stroke="#5A4535"
-              strokeWidth="1.5"
-              fill="none"
-              opacity="0.6"
-            />
-            {/* Arms */}
-            <path d="M28 34 L16 55" stroke="#C4A882" strokeWidth="7" strokeLinecap="round" />
-            <path d="M52 34 L64 55" stroke="#C4A882" strokeWidth="7" strokeLinecap="round" />
-            {/* Legs */}
-            <rect x="30" y="135" width="8" height="22" rx="4" fill="#C4A882" />
-            <rect x="42" y="135" width="8" height="22" rx="4" fill="#C4A882" />
-          </svg>
+          <Img
+            src={staticFile("zara-dress.jpg")}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+            }}
+          />
         </div>
 
         {/* Product info */}
