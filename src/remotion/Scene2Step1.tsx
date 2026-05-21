@@ -111,7 +111,7 @@ const ZaraScreen: React.FC<{ frame: number }> = ({ frame }) => {
           }}
         >
           <Img
-            src={staticFile("zara-dress.jpg")}
+            src={staticFile("/zara-dress.jpg")}
             style={{
               width: "100%",
               height: "100%",
