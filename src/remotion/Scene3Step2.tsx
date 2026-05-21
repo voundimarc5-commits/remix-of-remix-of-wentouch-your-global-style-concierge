@@ -3,175 +3,445 @@ import { useCurrentFrame, interpolate, Easing } from "remotion";
 import { THEME, FONTS } from "./theme";
 import { IPhoneMockup } from "./IPhoneMockup";
 
+// Progress step indicator
+const ProgressStep: React.FC<{ n: number; label: string; active: boolean; done?: boolean }> = ({
+  n,
+  label,
+  active,
+  done,
+}) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+    <div
+      style={{
+        width: 18,
+        height: 18,
+        borderRadius: "50%",
+        border: `1.5px solid ${active || done ? THEME.gold : "#CCC"}`,
+        backgroundColor: done ? THEME.gold : "transparent",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+      }}
+    >
+      <span
+        style={{
+          fontFamily: FONTS.sans,
+          fontSize: 7.5,
+          color: done ? "#FFF" : active ? THEME.gold : "#CCC",
+          fontWeight: 600,
+        }}
+      >
+        {n}
+      </span>
+    </div>
+    <span
+      style={{
+        fontFamily: FONTS.sans,
+        fontSize: 7,
+        letterSpacing: "1.5px",
+        fontWeight: 600,
+        color: active ? THEME.textMain : "#BBB",
+        textTransform: "uppercase",
+      }}
+    >
+      {label}
+    </span>
+  </div>
+);
+
+const ProgressBar: React.FC<{ step: number }> = ({ step }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+    <ProgressStep n={1} label="ARTICLES" active={step === 1} done={step > 1} />
+    <div
+      style={{
+        flex: 1,
+        height: 0.5,
+        backgroundColor: step > 1 ? THEME.gold : "#DDD",
+        margin: "0 4px",
+      }}
+    />
+    <ProgressStep n={2} label="COORDONNÉES" active={step === 2} done={step > 2} />
+    <div style={{ flex: 1, height: 0.5, backgroundColor: "#DDD", margin: "0 4px" }} />
+    <ProgressStep n={3} label="DEVIS" active={step === 3} />
+  </div>
+);
+
 const WentouchScreen: React.FC<{ frame: number }> = ({ frame }) => {
-  const url = "order.wentouch.shop";
-  const urlChars = Math.floor(
-    interpolate(frame, [15, 55], [0, url.length], {
+  const zaraUrl = "zara.com/uk/en/draped-short-dress-p04174238.html";
+
+  // Phase 1: type the Zara URL into input (frames 20-80)
+  const typedChars = Math.floor(
+    interpolate(frame, [20, 82], [0, zaraUrl.length], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.quad),
     })
   );
 
-  const link = "zara.com/fr/fr/robe-longue-soie";
-  const linkChars = Math.floor(
-    interpolate(frame, [55, 100], [0, link.length], {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.out(Easing.quad),
-    })
-  );
-
-  const btnGlow = interpolate(frame, [100, 118], [0, 1], {
+  // Phase 2: button lights up (frames 85-100)
+  const btnGlow = interpolate(frame, [85, 100], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
-  const btnScale = interpolate(frame, [118, 128, 134], [1, 0.92, 1], {
+
+  // Phase 3: button click (frames 100-112)
+  const btnScale = interpolate(frame, [100, 108, 115], [1, 0.91, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.inOut(Easing.cubic),
   });
 
-  const formOpacity = interpolate(frame, [134, 158], [0, 1], {
+  // Phase 4: transition to step 2 (frames 118+)
+  const step2Opacity = interpolate(frame, [118, 145], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
+  const step1Opacity = interpolate(frame, [112, 132], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.in(Easing.cubic),
+  });
+
+  const isStep2 = frame >= 132;
 
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
-        backgroundColor: "#FAFAF8",
-        fontFamily: FONTS.sans,
+        backgroundColor: "#F5F0EB",
         display: "flex",
         flexDirection: "column",
-        paddingTop: 42,
+        overflow: "hidden",
+        position: "relative",
       }}
     >
-      {/* Safari bar */}
+      {/* Status bar spacer */}
+      <div style={{ height: 42 }} />
+
+      {/* Header */}
       <div
         style={{
-          margin: "0 12px",
-          padding: "6px 10px",
-          backgroundColor: "#F2F2F7",
-          borderRadius: 8,
-          fontSize: 10,
-          color: "#333",
+          padding: "0 16px 10px",
           display: "flex",
+          justifyContent: "space-between",
           alignItems: "center",
-          gap: 4,
         }}
       >
-        <span style={{ fontSize: 9, color: "#007AFF" }}>🔒</span>
-        <span>{url.slice(0, urlChars)}</span>
-        {urlChars < url.length && (
-          <span style={{ borderRight: "1.5px solid #888", height: 10 }} />
-        )}
+        <div
+          style={{
+            fontFamily: FONTS.serif,
+            fontSize: 18,
+            fontWeight: 500,
+            color: THEME.textMain,
+          }}
+        >
+          Wen<span style={{ color: THEME.gold, fontStyle: "italic" }}>touch</span>
+        </div>
+        <div
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 7,
+            letterSpacing: "1.5px",
+            color: "#999",
+            textTransform: "uppercase",
+          }}
+        >
+          CONCIERGERIE — EUROPE
+        </div>
       </div>
 
-      <div style={{ flex: 1, padding: "14px 14px 0", display: "flex", flexDirection: "column", gap: 10 }}>
-        {/* Logo */}
-        <div style={{ fontSize: 15, fontWeight: 700, color: THEME.textMain, fontFamily: FONTS.serif }}>
-          Wen<span style={{ color: THEME.gold, fontStyle: "italic" }}>touch</span>
-          <span style={{ fontFamily: FONTS.sans, fontSize: 9, color: "#AAA", fontStyle: "normal", marginLeft: 6 }}>
-            · Shopping Conciergerie
-          </span>
+      {/* Page content */}
+      <div style={{ flex: 1, padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
+        {/* Back link */}
+        <div style={{ fontFamily: FONTS.sans, fontSize: 7.5, color: "#AAA", letterSpacing: "0.5px" }}>
+          ← ACCUEIL
         </div>
 
-        <div style={{ fontSize: 9, color: "#888" }}>Collez le lien du produit européen</div>
-
-        {/* Link input */}
+        {/* Eyebrow */}
         <div
           style={{
-            border: `1px solid ${linkChars > 0 ? THEME.gold : "#DDD"}`,
-            borderRadius: 7,
-            padding: "7px 8px",
-            fontSize: 8.5,
-            color: "#444",
-            backgroundColor: "#FFF",
-            minHeight: 30,
-            display: "flex",
-            alignItems: "center",
-            transition: "border-color 0.3s",
-          }}
-        >
-          {linkChars > 0 ? (
-            <>
-              {link.slice(0, linkChars)}
-              {linkChars < link.length && (
-                <span style={{ borderRight: "1.5px solid #888", height: 10, marginLeft: 1 }} />
-              )}
-            </>
-          ) : (
-            <span style={{ color: "#CCC" }}>https://...</span>
-          )}
-        </div>
-
-        {/* Commander button */}
-        <div
-          style={{
-            backgroundColor: THEME.gold,
-            borderRadius: 8,
-            padding: "9px 12px",
-            textAlign: "center",
-            fontSize: 10.5,
+            fontFamily: FONTS.sans,
+            fontSize: 7.5,
+            letterSpacing: "2px",
+            color: THEME.gold,
             fontWeight: 600,
-            color: "#FFF",
-            transform: `scale(${btnScale})`,
-            boxShadow:
-              btnGlow > 0.01
-                ? `0 0 ${18 * btnGlow}px ${8 * btnGlow}px rgba(184,148,44,${0.45 * btnGlow})`
-                : "none",
+            textTransform: "uppercase",
           }}
         >
-          Commander →
+          NOUVELLE COMMANDE
         </div>
 
-        {/* Form filled */}
-        {formOpacity > 0.01 && (
+        {/* Title */}
+        <div>
           <div
             style={{
-              opacity: formOpacity,
-              display: "flex",
-              flexDirection: "column",
-              gap: 6,
-              marginTop: 2,
+              fontFamily: FONTS.serif,
+              fontSize: 20,
+              fontWeight: 500,
+              color: THEME.textMain,
+              lineHeight: 1.1,
             }}
           >
+            Trouvez-le en Europe.
+          </div>
+          <div
+            style={{
+              fontFamily: FONTS.serif,
+              fontSize: 19,
+              fontStyle: "italic",
+              color: THEME.gold,
+              lineHeight: 1.2,
+            }}
+          >
+            Nous nous occupons du reste.
+          </div>
+        </div>
+
+        {/* Gold separator */}
+        <div style={{ width: 28, height: 1, backgroundColor: THEME.gold, opacity: 0.6 }} />
+
+        {/* Subtitle */}
+        <div
+          style={{
+            fontFamily: FONTS.sans,
+            fontSize: 8,
+            color: "#888",
+            lineHeight: 1.6,
+            textAlign: "center",
+          }}
+        >
+          Collez le lien de votre article, renseignez les détails{"\n"}et recevez votre devis instantanément.
+        </div>
+
+        {/* Progress bar */}
+        <ProgressBar step={isStep2 ? 2 : 1} />
+
+        {/* Step panel */}
+        <div
+          style={{
+            backgroundColor: "#FFFFFF",
+            borderRadius: 14,
+            padding: "14px 14px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+            boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* STEP 1 content */}
+          <div style={{ opacity: step1Opacity }}>
             <div
               style={{
-                fontSize: 7.5,
-                color: "#999",
-                textTransform: "uppercase",
+                fontFamily: FONTS.sans,
+                fontSize: 8,
                 letterSpacing: "1.5px",
-                fontWeight: 500,
+                color: THEME.gold,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginBottom: 4,
               }}
             >
-              Vos coordonnées
+              ÉTAPE 1
             </div>
-            {[
-              { label: "Nom complet", value: "Marie Mbongo" },
-              { label: "Ville", value: "Douala, Cameroun" },
-              { label: "WhatsApp", value: "+237 6XX XXX XXX" },
-            ].map(({ label, value }) => (
+            <div
+              style={{
+                fontFamily: FONTS.serif,
+                fontSize: 15,
+                fontWeight: 500,
+                color: THEME.textMain,
+                marginBottom: 10,
+              }}
+            >
+              Collez le lien de votre article
+            </div>
+
+            {/* Input + button */}
+            <div style={{ display: "flex", gap: 6 }}>
               <div
-                key={label}
                 style={{
-                  border: "1px solid #E5E5E5",
-                  borderRadius: 6,
-                  padding: "5px 8px",
-                  backgroundColor: "#FFF",
+                  flex: 1,
+                  border: `1px solid ${typedChars > 0 ? THEME.gold : "#DDD"}`,
+                  borderRadius: 8,
+                  padding: "7px 8px",
+                  fontFamily: FONTS.sans,
+                  fontSize: 7.5,
+                  color: typedChars > 0 ? THEME.textMain : "#CCC",
+                  backgroundColor: "#FAFAFA",
+                  display: "flex",
+                  alignItems: "center",
+                  minHeight: 30,
+                  transition: "border-color 0.3s",
+                  overflow: "hidden",
                 }}
               >
-                <div style={{ fontSize: 7, color: "#AAA", marginBottom: 2 }}>{label}</div>
-                <div style={{ fontSize: 9, color: THEME.textMain, fontWeight: 500 }}>{value}</div>
+                {typedChars > 0 ? (
+                  <span style={{ wordBreak: "break-all" }}>
+                    {zaraUrl.slice(0, typedChars)}
+                    {typedChars < zaraUrl.length && (
+                      <span
+                        style={{
+                          borderRight: "1.5px solid #888",
+                          height: 10,
+                          marginLeft: 1,
+                          display: "inline-block",
+                          verticalAlign: "middle",
+                        }}
+                      />
+                    )}
+                  </span>
+                ) : (
+                  "https://www.zara.com/fr/..."
+                )}
               </div>
-            ))}
+              <div
+                style={{
+                  backgroundColor: typedChars >= zaraUrl.length ? THEME.gold : "#CCC",
+                  borderRadius: 8,
+                  padding: "7px 10px",
+                  fontFamily: FONTS.sans,
+                  fontSize: 8,
+                  fontWeight: 600,
+                  color: "#FFF",
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "center",
+                  transform: `scale(${btnScale})`,
+                  boxShadow:
+                    btnGlow > 0.01
+                      ? `0 0 ${14 * btnGlow}px rgba(184,148,44,${0.5 * btnGlow})`
+                      : "none",
+                  transition: "background-color 0.3s",
+                }}
+              >
+                Continuer →
+              </div>
+            </div>
+
+            {/* Accepted sites */}
+            <div
+              style={{
+                fontFamily: FONTS.sans,
+                fontSize: 7,
+                color: "#AAA",
+                lineHeight: 1.5,
+                marginTop: 4,
+              }}
+            >
+              Zara, ASOS, Sephora, Farfetch, Amazon UK — tout lien européen accepté.
+            </div>
+
+            {/* Add more */}
+            <div
+              style={{
+                height: 0.5,
+                backgroundColor: "#EEE",
+                margin: "8px 0",
+              }}
+            />
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: "50%",
+                  border: `1.5px dashed ${THEME.gold}`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <span style={{ color: THEME.gold, fontSize: 12, lineHeight: 1 }}>+</span>
+              </div>
+              <span style={{ fontFamily: FONTS.sans, fontSize: 7.5, color: "#BBB" }}>
+                Vous pourrez ajouter d'autres articles après avoir renseigné le premier.
+              </span>
+            </div>
           </div>
-        )}
+
+          {/* STEP 2 content — coordonnées */}
+          {step2Opacity > 0.01 && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                padding: "14px 14px",
+                opacity: step2Opacity,
+                backgroundColor: "#FFF",
+                borderRadius: 14,
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: FONTS.sans,
+                  fontSize: 8,
+                  letterSpacing: "1.5px",
+                  color: THEME.gold,
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                }}
+              >
+                ÉTAPE 2
+              </div>
+              <div
+                style={{
+                  fontFamily: FONTS.serif,
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: THEME.textMain,
+                }}
+              >
+                Vos coordonnées
+              </div>
+              {[
+                { label: "Nom complet", value: "Marie Mbongo" },
+                { label: "Ville", value: "Douala, Cameroun" },
+                { label: "WhatsApp", value: "+237 6XX XXX XXX" },
+              ].map(({ label, value }) => (
+                <div
+                  key={label}
+                  style={{
+                    border: "1px solid #E8E8E8",
+                    borderRadius: 7,
+                    padding: "6px 10px",
+                    backgroundColor: "#FAFAFA",
+                  }}
+                >
+                  <div style={{ fontFamily: FONTS.sans, fontSize: 6.5, color: "#AAA", marginBottom: 2 }}>
+                    {label}
+                  </div>
+                  <div style={{ fontFamily: FONTS.sans, fontSize: 9, color: THEME.textMain, fontWeight: 500 }}>
+                    {value}
+                  </div>
+                </div>
+              ))}
+              <div
+                style={{
+                  backgroundColor: THEME.gold,
+                  borderRadius: 8,
+                  padding: "8px",
+                  textAlign: "center",
+                  fontFamily: FONTS.sans,
+                  fontSize: 9,
+                  fontWeight: 600,
+                  color: "#FFF",
+                  marginTop: 2,
+                }}
+              >
+                Obtenir mon devis →
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
