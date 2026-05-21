@@ -132,17 +132,17 @@ const Field: React.FC<{
   </div>
 );
 
-// Timing constants (relative to scene frame)
+// Timing constants (relative to scene frame, max 209)
 // Phase 1: URL typing + click (0-118)
-// Phase 2: form appears (118-145), then fields animate
+// Phase 2: form appears (118-135), then fields animate
 const F = {
-  step2In:      [118, 145],
-  nom:          [148, 165],   // "Marie Mbongo" 13 chars
-  whatsapp:     [169, 188],   // "+237 696 157 575" 16 chars
-  email:        [192, 208],   // "marie@wentouch.com" 18 chars
-  villeOpen:    [212, 216],   // dropdown opens
-  villeSelect:  [216, 220],   // Douala selected
-  btnPulse:     [222, 210],   // button pulse start
+  step2In:      [118, 135],
+  nom:          [138, 152],   // "Marie Mbongo" 13 chars
+  whatsapp:     [155, 168],   // "+237 696 157 575" 16 chars
+  email:        [171, 182],   // "marie@wentouch.com" 18 chars
+  villeOpen:    [185, 189],   // dropdown opens
+  villeSelect:  [189, 193],   // Douala selected
+  btnPulse:     [196, 209],   // button pulse
 };
 
 const NOM_TEXT = "Marie Mbongo";
@@ -203,14 +203,14 @@ const WentouchScreen: React.FC<{ frame: number }> = ({ frame }) => {
   const dropdownOpen   = frame >= F.villeOpen[0] && frame < F.villeSelect[1] + 3;
 
   // Button pulse (after all fields done)
-  const btnPulseOpacity = interpolate(frame, [222, 232], [0, 1], {
+  const btnPulseOpacity = interpolate(frame, [F.btnPulse[0], F.btnPulse[0] + 8], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
   const btnPulseScale = interpolate(
     frame,
-    [232, 240, 248, 256],
-    [1, 1.03, 1, 1.03],
+    [F.btnPulse[0] + 8, F.btnPulse[0] + 14, F.btnPulse[1]],
+    [1, 1.03, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sine) }
   );
 
@@ -382,7 +382,7 @@ const WentouchScreen: React.FC<{ frame: number }> = ({ frame }) => {
               fontWeight: 700, color: "#FFF", letterSpacing: "2px", textTransform: "uppercase",
               opacity: btnPulseOpacity,
               transform: `scale(${frame >= 222 ? btnPulseScale : 1})`,
-              boxShadow: frame >= 222
+              boxShadow: frame >= F.btnPulse[0]
                 ? `0 4px 18px rgba(184,148,44,0.45)`
                 : "none",
             }}>
